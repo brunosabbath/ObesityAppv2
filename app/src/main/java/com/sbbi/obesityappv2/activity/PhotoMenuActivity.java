@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.camera.Camera2BasicFragment;
 
 /**
  * Created by bsilva on 10/20/16.
@@ -31,7 +32,9 @@ public class PhotoMenuActivity extends AppCompatActivity{
     }
 
     public void photoTopClick(View view){
-        paths[TOP] = "top";
+        //paths[TOP] = "top";
+        getFragmentManager().beginTransaction().replace(R.id.photo, Camera2BasicFragment.newInstance()).commit();
+        //new Camera2BasicFragment();
     }
 
     public void photoSide1Click(View view){
