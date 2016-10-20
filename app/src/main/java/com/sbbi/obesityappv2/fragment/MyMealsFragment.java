@@ -46,7 +46,7 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
             }
         });
 
-        new HttpRequestListFood(this).execute();
+        //new HttpRequestListFood(this).execute();
 
         return layout;
     }

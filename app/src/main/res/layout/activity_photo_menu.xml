@@ -3,12 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/cameraTop"
+        android:layout_alignParentRight="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="photoTopClick"
+        android:src="@drawable/camera" />
+
     <TextView
-        android:id="@+id/about_text"
+        android:id="@+id/top"
+        android:layout_toLeftOf="@id/cameraTop"
+        android:layout_alignParentLeft="true"
         android:textSize="20dp"
         android:layout_margin="16dp"
-        android:text="camera menu"
+        android:text="top picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/cameraSide1"
+        android:layout_below="@+id/top"
+        android:layout_alignParentRight="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="photoSide1Click"
+        android:src="@drawable/camera" />
+
+    <TextView
+        android:id="@+id/side1"
+        android:layout_below="@+id/top"
+        android:layout_toLeftOf="@id/cameraSide1"
+        android:layout_alignParentLeft="true"
+        android:textSize="20dp"
+        android:layout_margin="16dp"
+        android:text="side 1 picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/cameraSide2"
+        android:layout_below="@+id/side1"
+        android:layout_alignParentRight="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="photoSide2Click"
+        android:src="@drawable/camera" />
+
+    <TextView
+        android:id="@+id/side2"
+        android:layout_below="@+id/side1"
+        android:layout_toLeftOf="@id/cameraSide2"
+        android:layout_alignParentLeft="true"
+        android:textSize="20dp"
+        android:layout_margin="16dp"
+        android:text="side 2 picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/cameraSide3"
+        android:layout_below="@+id/side2"
+        android:layout_alignParentRight="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="photoSide3Click"
+        android:src="@drawable/camera" />
+
+    <TextView
+        android:id="@+id/side3"
+        android:layout_below="@+id/side2"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/cameraSide3"
+        android:textSize="20dp"
+        android:layout_margin="16dp"
+        android:text="side 3 picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_below="@id/side3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="analyzeOnClick"
+        android:text="Analyze" />
 
 </RelativeLayout>
