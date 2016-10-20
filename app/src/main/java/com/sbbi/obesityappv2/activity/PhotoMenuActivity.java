@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.camera.Camera2BasicFragment;
+import com.sbbi.obesityappv2.fragment.TestFragment;
 
 /**
  * Created by bsilva on 10/20/16.
@@ -38,7 +39,8 @@ public class PhotoMenuActivity extends AppCompatActivity{
     }
 
     public void photoSide1Click(View view){
-        paths[SIDE_1] = "SIDE1";
+        //paths[SIDE_1] = "SIDE1";
+        getFragmentManager().beginTransaction().replace(R.id.photo, TestFragment.newInstance()).commit();
     }
 
     public void photoSide2Click(View view){
