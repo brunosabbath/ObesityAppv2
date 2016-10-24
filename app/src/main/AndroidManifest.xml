@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- my pc String url = "http://129.93.164.34:8080/picture"; -->
 
+    <!-- my pc String url = "http://129.93.164.34:8080/picture"; -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,11 +24,15 @@
         </activity>
         <activity
             android:name=".activity.PhotoMenuActivity"
-            android:label="Photo menu" >
+            android:label="Photo menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

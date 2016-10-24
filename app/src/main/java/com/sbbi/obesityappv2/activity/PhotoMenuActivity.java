@@ -1,5 +1,7 @@
 package com.sbbi.obesityappv2.activity;
 
+import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -45,11 +47,14 @@ public class PhotoMenuActivity extends AppCompatActivity{
 
     public void photoTopClick(View view){
         //paths[TOP] = "top";
-        Camera2BasicFragment camera2BasicFragment = Camera2BasicFragment.newInstance();
+        /*Camera2BasicFragment camera2BasicFragment = Camera2BasicFragment.newInstance();
         camera2BasicFragment.setPhotoPath(paths);
         camera2BasicFragment.setTypePhoto(0);
-        getFragmentManager().beginTransaction().replace(R.id.photo, Camera2BasicFragment.newInstance()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.photo, Camera2BasicFragment.newInstance()).commit();*/
         //new Camera2BasicFragment();
+
+        startActivity((new Intent(this, CameraActivity.class)));
+
     }
 
     public void photoSide1Click(View view){
