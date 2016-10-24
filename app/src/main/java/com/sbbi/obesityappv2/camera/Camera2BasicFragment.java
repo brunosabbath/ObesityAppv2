@@ -33,6 +33,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.Size;
@@ -45,6 +47,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.activity.PhotoMenuActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -70,6 +73,8 @@ public class Camera2BasicFragment  extends Fragment
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
+    private static int TYPE_PHOTO;
+    private static String photoPath[] = new String[4];
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -409,6 +414,22 @@ public class Camera2BasicFragment  extends Fragment
         return new Camera2BasicFragment();
     }
 
+    public String[] getPhotoPath(){
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath[]){
+        this.photoPath = photoPath;
+    }
+
+    public void setTypePhoto(int type) {
+        this.TYPE_PHOTO = type;
+    }
+
+    private int getTypePhoto(){
+        return this.TYPE_PHOTO;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -425,7 +446,7 @@ public class Camera2BasicFragment  extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        mFile = new File(getActivity().getExternalFilesDir(null), "pic" + getTypePhoto() + ".jpg");
     }
 
     @Override
@@ -481,6 +502,7 @@ public class Camera2BasicFragment  extends Fragment
      */
     private void setUpCameraOutputs(int width, int height) {
         Activity activity = getActivity();
+
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
             for (String cameraId : manager.getCameraIdList()) {
@@ -820,14 +842,17 @@ public class Camera2BasicFragment  extends Fragment
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    //showToast("Saved: " + mFile);
-                    Log.d(TAG, mFile.toString());
+
                     unlockFocus();
 
                     //TODO
-                    /*Intent intent = new Intent(getActivity(), Next.class);
-                    intent.putExtra("photoPath", mFile.toString());
-                    startActivity(intent);*/
+                    Intent intent = new Intent(getActivity(), PhotoMenuActivity.class);
+
+                    photoPath[getTypePhoto()] = mFile.toString();
+
+                    intent.putExtra("photoPath", photoPath);
+
+                    startActivity(intent);
                 }
             };
 
@@ -846,6 +871,7 @@ public class Camera2BasicFragment  extends Fragment
      * @return The JPEG orientation (one of 0, 90, 270, and 360)
      */
     private int getOrientation(int rotation) {
+
         // Sensor orientation is 90 for most devices, or 270 for some devices (eg. Nexus 5X)
         // We have to take that into account and rotate JPEG properly.
         // For devices with orientation of 90, we simply return our mapping from ORIENTATIONS.
@@ -901,6 +927,8 @@ public class Camera2BasicFragment  extends Fragment
         }
     }
 
+
+
     /**
      * Saves a JPEG {@link Image} into the specified {@link File}.
      */
@@ -913,6 +941,7 @@ public class Camera2BasicFragment  extends Fragment
         /**
          * The JPEG image
          */
+
         private final Image mImage;
         /**
          * The file we save the image into.
