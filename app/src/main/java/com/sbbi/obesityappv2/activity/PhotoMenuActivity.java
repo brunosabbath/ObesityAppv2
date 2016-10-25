@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.interf.ClassificationInterf;
+import com.sbbi.obesityappv2.model.ClassificationReturn;
 import com.sbbi.obesityappv2.request.UploadImages;
 
 /**
  * Created by bsilva on 10/20/16.
  */
-public class PhotoMenuActivity extends AppCompatActivity{
+public class PhotoMenuActivity extends AppCompatActivity implements ClassificationInterf{
 
     private final int TOP = 0;
     private final int SIDE_1 = 1;
@@ -29,15 +31,12 @@ public class PhotoMenuActivity extends AppCompatActivity{
             paths = extras.getStringArray("photoPath");
         }
 
-
         setContentView(R.layout.activity_photo_menu);
-
     }
 
     public void analyzeOnClick(View view){
-        //Toast.makeText(this,paths[0] + "\n" + paths[1] + "\n" + paths[2] + "\n" + paths[3], Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, "ahsdkjshd", Toast.LENGTH_SHORT).show();
-        new UploadImages().execute(paths);
+
+        new UploadImages(this).execute(paths);
     }
 
     public void photoTopClick(View view){
@@ -84,4 +83,14 @@ public class PhotoMenuActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void sendToResultScreen(ClassificationReturn classificationReturn) {
+        Intent intent = new Intent(this, ResultActivity.class);
+        Bundle extras = new Bundle();
+        //extras.putSerializable("result",classificationReturn);
+        extras.putString("result", classificationReturn.getFood1Str());
+        intent.putExtras(extras);
+
+        startActivity(intent);
+    }
 }
