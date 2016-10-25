@@ -18,7 +18,11 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         if (null == savedInstanceState) {
-            getFragmentManager().beginTransaction().replace(R.id.container, Camera2BasicFragment.newInstance()).commit();
+            Camera2BasicFragment camera2BasicFragment = Camera2BasicFragment.newInstance();
+            Bundle extras = getIntent().getExtras();
+            camera2BasicFragment.setPhotoPath(extras.getStringArray("photoPath"));
+            camera2BasicFragment.setTypePhoto(extras.getInt("position"));
+            getFragmentManager().beginTransaction().replace(R.id.container, camera2BasicFragment).commit();
         }
     }
 
