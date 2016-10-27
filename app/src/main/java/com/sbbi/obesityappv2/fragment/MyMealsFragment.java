@@ -46,6 +46,24 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
             }
         });
 
+        Food f1 = new Food();
+        f1.setName("Breakfast");
+
+        Food f2 = new Food();
+        f2.setName("Lunch");
+
+        Food f3 = new Food();
+        f3.setName("Dinner");
+
+        Food f4 = new Food();
+        f4.setName("Breakfast");
+
+        Food foods[] = new Food[4];
+        foods[0] = f1;
+        foods[1] = f2;
+        foods[2] = f3;
+        foods[3] = f4;
+        serLayoutAfterRequest(foods);
         //new HttpRequestListFood(this).execute();
 
         return layout;
