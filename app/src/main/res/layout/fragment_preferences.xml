@@ -16,10 +16,5 @@
         android:text="fitbit"
         android:id="@+id/btnFitbit"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="activity"
-        android:id="@+id/btnActivity"/>
 
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +28,8 @@ public class HttpRequestListFood extends AsyncTask<Void, Void, Food[]> {
 
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+
 
         try{
 

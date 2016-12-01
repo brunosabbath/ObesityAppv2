@@ -7,6 +7,10 @@ import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.model.fitbit.Greeting;
 import com.sbbi.obesityappv2.model.fitbit.LifetimeActivity;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -28,7 +32,13 @@ public class FitbitApiHttp extends AsyncTask<Void, Void, String> {
         //String url = "https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=227N4J&redirect_uri=http%3A%2F%2Fgoogle.com&scope=activity%20profile%20sleep&expires_in=604800";
         String url2 = "http://129.93.164.34:5151/";
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0SkY5TlYiLCJhdWQiOiIyMjdZVkoiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJ3cHJvIHdhY3QiLCJleHAiOjE0ODEyMjk3MzIsImlhdCI6MTQ4MDYyNDkzMn0.b1ZT-oICYphGDGi0ZxkxR4wF6gGQ4JGc0VAkblEYvSs");
 
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+        ResponseEntity<LifetimeActivity> response = template.exchange("https://api.fitbit.com/1/user/-/activities/date/2016-12-01.json", HttpMethod.GET, request, LifetimeActivity.class);
+        LifetimeActivity act = response.getBody();
+/*
         try {
             URL url = new URL("http://129.93.164.34:5151/login");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -39,7 +49,7 @@ public class FitbitApiHttp extends AsyncTask<Void, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
         /*try{
 
             Greeting activity = template.getForObject(url2, Greeting.class);

@@ -34,16 +34,16 @@ public class PreferencesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "api", Toast.LENGTH_SHORT).show();
-                //new FitbitApiHttp().execute();
+                new FitbitApiHttp().execute();
 
-                String url = "https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=227YVJ&redirect_uri=fitbittester://logincallback&scope=activity&expires_in=604800&prompt=login";
+                /*String url = "https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=227YVJ&redirect_uri=fitbittester://logincallback&scope=activity&expires_in=604800&prompt=login";
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();
                 customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
+                */
 
                 //Intent i = new Intent(getActivity(), Test.class);
                 //startActivity(i);
-
 
             }
         });
