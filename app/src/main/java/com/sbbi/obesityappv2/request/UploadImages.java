@@ -3,6 +3,7 @@ package com.sbbi.obesityappv2.request;
 import android.os.AsyncTask;
 
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
+import com.sbbi.obesityappv2.model.ResponseFoodName;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
@@ -22,7 +23,7 @@ import java.nio.charset.Charset;
 /**
  * Created by bsilva on 10/24/16.
  */
-public class UploadImages extends AsyncTask<String[], Void, String[]>{
+public class UploadImages extends AsyncTask<String[], Void, ResponseFoodName>{
 
     private ClassificationInterf listener;
 
@@ -31,7 +32,7 @@ public class UploadImages extends AsyncTask<String[], Void, String[]>{
     }
 
     @Override
-    protected String[] doInBackground(String[]... strings) {
+    protected ResponseFoodName doInBackground(String[]... strings) {
 
         String url = "http://129.93.164.34:8080/pictures";
 
@@ -73,13 +74,13 @@ public class UploadImages extends AsyncTask<String[], Void, String[]>{
 
         HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
 
-        ResponseEntity<String[]> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, String[].class);
+        ResponseEntity<ResponseFoodName> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, ResponseFoodName.class);
 
         return response.getBody();
     }
 
     @Override
-    protected void onPostExecute(String[] classificationReturn) {
-        listener.sendToResultScreen(classificationReturn);
+    protected void onPostExecute(ResponseFoodName responseFoodName) {
+        listener.sendToResultScreen(responseFoodName);
     }
 }
