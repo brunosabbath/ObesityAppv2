@@ -1,0 +1,70 @@
+package com.sbbi.obesityappv2.model;
+
+/**
+ * Created by bsilva on 11/1/16.
+ */
+public class ResponseFood {
+
+    private String food1[];
+    private String food2[];
+    private String food3[];
+    private double weightFood1;
+    private double weightFood2;
+    private double weightFood3;
+
+    public ResponseFood(){}
+
+    public double getWeightFood1() {
+        return weightFood1;
+    }
+
+    public ResponseFood setWeightFood1(double weightFood1) {
+        this.weightFood1 = weightFood1;
+        return this;
+    }
+
+    public double getWeightFood2() {
+        return weightFood2;
+    }
+
+    public ResponseFood setWeightFood2(double weightFood2) {
+        this.weightFood2 = weightFood2;
+        return this;
+    }
+
+    public double getWeightFood3() {
+        return weightFood3;
+    }
+
+    public ResponseFood setWeightFood3(double weightFood3) {
+        this.weightFood3 = weightFood3;
+        return this;
+    }
+
+    public String[] getFood1() {
+        return food1;
+    }
+
+    public ResponseFood setFood1(String[] food1) {
+        this.food1 = food1;
+        return this;
+    }
+
+    public String[] getFood2() {
+        return food2;
+    }
+
+    public ResponseFood setFood2(String[] food2) {
+        this.food2 = food2;
+        return this;
+    }
+
+    public String[] getFood3() {
+        return food3;
+    }
+
+    public ResponseFood setFood3(String[] food3) {
+        this.food3 = food3;
+        return this;
+    }
+}

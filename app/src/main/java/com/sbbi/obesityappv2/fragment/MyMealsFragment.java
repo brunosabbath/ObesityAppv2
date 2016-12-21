@@ -63,7 +63,7 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
         foods[1] = f2;
         foods[2] = f3;
         foods[3] = f4;
-        serLayoutAfterRequest(foods);
+        setLayoutAfterRequest(foods);
         //new HttpRequestListFood(this).execute();
 
         return layout;
@@ -71,7 +71,7 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
 
 
     @Override
-    public void serLayoutAfterRequest(Food[] food) {
+    public void setLayoutAfterRequest(Food[] food) {
         if(food.length == 0) {
             //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
             //errorMsg.setVisibility(View.VISIBLE);

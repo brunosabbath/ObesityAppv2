@@ -3,7 +3,7 @@ package com.sbbi.obesityappv2.request;
 import android.os.AsyncTask;
 
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
-import com.sbbi.obesityappv2.model.ResponseFoodName;
+import com.sbbi.obesityappv2.model.ResponseFood;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
@@ -23,16 +23,21 @@ import java.nio.charset.Charset;
 /**
  * Created by bsilva on 10/24/16.
  */
-public class UploadImages extends AsyncTask<String[], Void, ResponseFoodName>{
+public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
 
     private ClassificationInterf listener;
+    private final int TOP = 0;
+    private final int SIDE_1 = 1;
+    private final int SIDE_2 = 2;
+    private final int SIDE_3 = 3;
+
 
     public UploadImages(ClassificationInterf listener){
         this.listener = listener;
     }
 
     @Override
-    protected ResponseFoodName doInBackground(String[]... strings) {
+    protected ResponseFood doInBackground(String[]... strings) {
 
         String url = "http://129.93.164.34:8080/pictures";
 
@@ -48,25 +53,26 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFoodName>{
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        if(path[0] != null)
-            map.add("file1", new FileSystemResource(path[0]));
-        else
-            map.add("file1", new FileSystemResource(path[0]));
 
-        if(path[1] != null)
-            map.add("file2", new FileSystemResource(path[1]));
+        if(hasPicture(path[0]))
+            map.add("file1", new FileSystemResource(path[TOP]));
         else
-            map.add("file2", new FileSystemResource(path[0]));
+            map.add("file1", new FileSystemResource(path[TOP]));
 
-        if(path[2] != null)
-            map.add("file3", new FileSystemResource(path[2]));
+        if(hasPicture(path[1]))
+            map.add("file2", new FileSystemResource(path[SIDE_1]));
         else
-            map.add("file3", new FileSystemResource(path[0]));
+            map.add("file2", new FileSystemResource(path[TOP]));
 
-        if(path[3] != null)
-            map.add("file4", new FileSystemResource(path[3]));
+        if(hasPicture(path[2]))
+            map.add("file3", new FileSystemResource(path[SIDE_2]));
         else
-            map.add("file4", new FileSystemResource(path[0]));
+            map.add("file3", new FileSystemResource(path[TOP]));
+
+        if(hasPicture(path[3]))
+            map.add("file4", new FileSystemResource(path[SIDE_3]));
+        else
+            map.add("file4", new FileSystemResource(path[TOP]));
 
 
         HttpHeaders imageHeaders = new HttpHeaders();
@@ -74,13 +80,21 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFoodName>{
 
         HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
 
-        ResponseEntity<ResponseFoodName> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, ResponseFoodName.class);
+        ResponseEntity<ResponseFood> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, ResponseFood.class);
 
         return response.getBody();
     }
 
+    private boolean hasPicture(String path) {
+        if(path != null)
+            return true;
+        else
+            return false;
+
+    }
+
     @Override
-    protected void onPostExecute(ResponseFoodName responseFoodName) {
+    protected void onPostExecute(ResponseFood responseFoodName) {
         listener.sendToResultScreen(responseFoodName);
     }
 }

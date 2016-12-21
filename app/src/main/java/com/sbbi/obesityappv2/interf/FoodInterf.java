@@ -7,6 +7,6 @@ import com.sbbi.obesityappv2.model.Food;
  */
 public interface FoodInterf {
 
-    public void serLayoutAfterRequest(Food[]food);
+    public void setLayoutAfterRequest(Food[]food);
 
 }

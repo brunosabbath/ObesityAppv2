@@ -44,6 +44,6 @@ public class HttpRequestListFood extends AsyncTask<Void, Void, Food[]> {
 
     @Override
     protected void onPostExecute(Food[] foods) {
-        listener.serLayoutAfterRequest(foods);
+        listener.setLayoutAfterRequest(foods);
     }
 }

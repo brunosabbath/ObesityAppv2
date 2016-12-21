@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
-import com.sbbi.obesityappv2.model.ResponseFoodName;
+import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.request.UploadImages;
 
 /**
@@ -38,6 +38,7 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
 
         //API CALL
         //new UploadImages(this).execute(paths);
+
         Intent intent = new Intent(this, ResultActivity.class);
         startActivity(intent);
     }
@@ -87,7 +88,7 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
     }
 
     @Override
-    public void sendToResultScreen(ResponseFoodName responseFoodName) {
+    public void sendToResultScreen(ResponseFood responseFoodName) {
         Intent intent = new Intent(this, ResultActivity.class);
         Bundle extras = new Bundle();
         //extras.putSerializable("result",classificationReturn);

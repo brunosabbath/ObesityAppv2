@@ -2,16 +2,50 @@ package com.sbbi.obesityappv2.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
+import com.sbbi.obesityappv2.recycleradapter.FoodRecyclerAdapter;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements FoodInterf{
+
+    private RecyclerView recyclerView;
+    private FoodPredictionRecyclerAdapter foodAdapter;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        //setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_result2);//new layout with CardView
+
+        recyclerView = (RecyclerView) findViewById(R.id.foodPrediction);
+
+        //mLayoutManager = new LinearLayoutManager(this);
+        //recyclerView.setLayoutManager(mLayoutManager);
+
+
+        foodAdapter = new FoodPredictionRecyclerAdapter(new Food[0], this);
+        recyclerView.setAdapter(foodAdapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Food f1 = new Food();
+        f1.setName("Breakfast");
+
+        Food f2 = new Food();
+        f2.setName("pow");
+
+        Food foods[] = new Food[2];
+        foods[0] = f1;
+        foods[1] = f2;
+
+        setLayoutAfterRequest(foods);
 
         Bundle extras = getIntent().getExtras();
         //ClassificationReturn classification = (ClassificationReturn) extras.get("result");
@@ -28,9 +62,9 @@ public class ResultActivity extends AppCompatActivity {
         String food2[] = {"Pear","Banana","Orange","Chips","Test","Test","Test","Test","Test","Test","Test","Test","Test"};
         String food3[] = {"Rice","Sandwich bread","Grilled breast chicken","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test"};
 
-        buildFood1(food1);
-        buildFood2(food2);
-        buildFood3(food3);
+        //buildFood1(food1);
+        //buildFood2(food2);
+        //buildFood3(food3);
 
     }
 
@@ -157,6 +191,15 @@ public class ResultActivity extends AppCompatActivity {
 
         TextView textView13 = (TextView) findViewById(R.id.f1btn13);
         textView13.setText(result[12]);
+
+    }
+
+    @Override
+    public void setLayoutAfterRequest(Food[] food) {
+
+        foodAdapter = new FoodPredictionRecyclerAdapter(food, this);
+        recyclerView.setAdapter(foodAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 }
