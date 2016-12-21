@@ -9,7 +9,6 @@ import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
-import com.sbbi.obesityappv2.recycleradapter.FoodRecyclerAdapter;
 
 public class ResultActivity extends AppCompatActivity implements FoodInterf{
 

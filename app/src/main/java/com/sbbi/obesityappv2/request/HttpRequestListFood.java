@@ -29,8 +29,6 @@ public class HttpRequestListFood extends AsyncTask<Void, Void, Food[]> {
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-
-
         try{
 
             Food[] list = template.getForObject(url, Food[].class);

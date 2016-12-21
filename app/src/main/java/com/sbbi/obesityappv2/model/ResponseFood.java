@@ -11,8 +11,40 @@ public class ResponseFood {
     private double weightFood1;
     private double weightFood2;
     private double weightFood3;
+    private Food nutrientsFood1;
+    private Food nutrientsFood2;
+    private Food nutrientsFood3;
 
     public ResponseFood(){}
+
+    public Food getNutrientsFood1() {
+        return nutrientsFood1;
+    }
+
+    public ResponseFood setNutrientsFood1(Food nutrientsFood1) {
+        this.nutrientsFood1 = nutrientsFood1;
+        return this;
+    }
+
+    public Food getNutrientsFood2() {
+        return nutrientsFood2;
+    }
+
+    public ResponseFood setNutrientsFood2(Food nutrientsFood2) {
+        this.nutrientsFood2 = nutrientsFood2;
+        return this;
+    }
+
+    public Food getNutrientsFood3() {
+        return nutrientsFood3;
+    }
+
+    public ResponseFood setNutrientsFood3(Food nutrientsFood3) {
+        this.nutrientsFood3 = nutrientsFood3;
+        return this;
+    }
+
+
 
     public double getWeightFood1() {
         return weightFood1;
