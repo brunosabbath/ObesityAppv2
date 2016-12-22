@@ -5,13 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
 import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
+import com.sbbi.obesityappv2.request.SaveMeal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +35,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_result);
-        setContentView(R.layout.activity_result2);//new layout with CardView
+        setContentView(R.layout.activity_result);//new layout with CardView
 
         recyclerView = (RecyclerView) findViewById(R.id.foodPrediction);
 
@@ -72,135 +78,26 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
         String food2[] = {"Pear","Banana","Orange","Chips","Test","Test","Test","Test","Test","Test","Test","Test","Test"};
         String food3[] = {"Rice","Sandwich bread","Grilled breast chicken","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test"};
 
-        //buildFood1(food1);
-        //buildFood2(food2);
-        //buildFood3(food3);
-
     }
 
-    private void buildFood3(String[] result) {
-        TextView textView1 = (TextView) findViewById(R.id.f3btn1);
-        textView1.setText(result[0]);
-
-        TextView textView2 = (TextView) findViewById(R.id.f3btn2);
-        textView2.setText(result[1]);
-
-        TextView textView3 = (TextView) findViewById(R.id.f3btn3);
-        textView3.setText(result[2]);
-
-        TextView textView4 = (TextView) findViewById(R.id.f3btn4);
-        textView4.setText(result[3]);
-
-        TextView textView5 = (TextView) findViewById(R.id.f3btn5);
-        textView5.setText(result[4]);
-
-        TextView textView6 = (TextView) findViewById(R.id.f3btn6);
-        textView6.setText(result[5]);
-
-        TextView textView7 = (TextView) findViewById(R.id.f3btn7);
-        textView7.setText(result[6]);
-
-        TextView textView8 = (TextView) findViewById(R.id.f3btn8);
-        textView8.setText(result[7]);
-
-        TextView textView9 = (TextView) findViewById(R.id.f3btn9);
-        textView9.setText(result[8]);
-
-        TextView textView10 = (TextView) findViewById(R.id.f3btn10);
-        textView10.setText(result[9]);
-
-        TextView textView11 = (TextView) findViewById(R.id.f3btn11);
-        textView11.setText(result[10]);
-
-        TextView textView12 = (TextView) findViewById(R.id.f3btn12);
-        textView12.setText(result[11]);
-
-        TextView textView13 = (TextView) findViewById(R.id.f3btn13);
-        textView13.setText(result[12]);
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.result_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    private void buildFood2(String[] result) {
-        TextView textView1 = (TextView) findViewById(R.id.f2btn1);
-        textView1.setText(result[0]);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        TextView textView2 = (TextView) findViewById(R.id.f2btn2);
-        textView2.setText(result[1]);
-
-        TextView textView3 = (TextView) findViewById(R.id.f2btn3);
-        textView3.setText(result[2]);
-
-        TextView textView4 = (TextView) findViewById(R.id.f2btn4);
-        textView4.setText(result[3]);
-
-        TextView textView5 = (TextView) findViewById(R.id.f2btn5);
-        textView5.setText(result[4]);
-
-        TextView textView6 = (TextView) findViewById(R.id.f2btn6);
-        textView6.setText(result[5]);
-
-        TextView textView7 = (TextView) findViewById(R.id.f2btn7);
-        textView7.setText(result[6]);
-
-        TextView textView8 = (TextView) findViewById(R.id.f2btn8);
-        textView8.setText(result[7]);
-
-        TextView textView9 = (TextView) findViewById(R.id.f2btn9);
-        textView9.setText(result[8]);
-
-        TextView textView10 = (TextView) findViewById(R.id.f2btn10);
-        textView10.setText(result[9]);
-
-        TextView textView11 = (TextView) findViewById(R.id.f2btn11);
-        textView11.setText(result[10]);
-
-        TextView textView12 = (TextView) findViewById(R.id.f2btn12);
-        textView12.setText(result[11]);
-
-        TextView textView13 = (TextView) findViewById(R.id.f2btn13);
-        textView13.setText(result[12]);
-    }
-
-    private void buildFood1(String[] result) {
-
-        TextView textView1 = (TextView) findViewById(R.id.f1btn1);
-        textView1.setText(result[0]);
-
-        TextView textView2 = (TextView) findViewById(R.id.f1btn2);
-        textView2.setText(result[1]);
-
-        TextView textView3 = (TextView) findViewById(R.id.f1btn3);
-        textView3.setText(result[2]);
-
-        TextView textView4 = (TextView) findViewById(R.id.f1btn4);
-        textView4.setText(result[3]);
-
-        TextView textView5 = (TextView) findViewById(R.id.f1btn5);
-        textView5.setText(result[4]);
-
-        TextView textView6 = (TextView) findViewById(R.id.f1btn6);
-        textView6.setText(result[5]);
-
-        TextView textView7 = (TextView) findViewById(R.id.f1btn7);
-        textView7.setText(result[6]);
-
-        TextView textView8 = (TextView) findViewById(R.id.f1btn8);
-        textView8.setText(result[7]);
-
-        TextView textView9 = (TextView) findViewById(R.id.f1btn9);
-        textView9.setText(result[8]);
-
-        TextView textView10 = (TextView) findViewById(R.id.f1btn10);
-        textView10.setText(result[9]);
-
-        TextView textView11 = (TextView) findViewById(R.id.f1btn11);
-        textView11.setText(result[10]);
-
-        TextView textView12 = (TextView) findViewById(R.id.f1btn12);
-        textView12.setText(result[11]);
-
-        TextView textView13 = (TextView) findViewById(R.id.f1btn13);
-        textView13.setText(result[12]);
+        switch (item.getItemId()){
+            case R.id.save_meal:
+                Toast.makeText(getApplicationContext(), "button pressed", Toast.LENGTH_LONG).show();
+                new SaveMeal().execute(listFood);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
 
@@ -227,9 +124,6 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
             if(resultCode == RESULT_OK){
 
                 BundleCorrectFood bundle = (BundleCorrectFood) data.getExtras().getSerializable("myBundle");
-
-                //String food = data.getStringExtra("foodName");
-                //int position = data.get("foodPosition"));
 
                 Food food = listFood.get(bundle.getPosition());
                 food.setName(bundle.getName());
