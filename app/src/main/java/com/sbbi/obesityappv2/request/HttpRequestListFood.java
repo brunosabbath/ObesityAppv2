@@ -10,10 +10,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by bsilva on 10/18/16.
  */
-public class HttpRequestListFood extends AsyncTask<Void, Void, Food[]> {
+public class HttpRequestListFood extends AsyncTask<Void, Void, List<Food>> {
 
     private FoodInterf listener;
 
@@ -22,7 +25,7 @@ public class HttpRequestListFood extends AsyncTask<Void, Void, Food[]> {
     }
 
     @Override
-    protected Food[] doInBackground(Void... params) {
+    protected List<Food> doInBackground(Void... params) {
 
         String url = "http://129.93.164.34:8080/food";
 
@@ -32,16 +35,24 @@ public class HttpRequestListFood extends AsyncTask<Void, Void, Food[]> {
         try{
 
             Food[] list = template.getForObject(url, Food[].class);
-            return list;
+
+            List<Food> listFood = new ArrayList<Food>();
+
+            for(int i = 0; i < list.length; i++){
+                listFood.add(list[i]);
+            }
+
+            return listFood;
+            //return list;
 
         } catch (RestClientException e){
-            return new Food[0];
+            return new ArrayList<Food>();
         }
 
     }
 
     @Override
-    protected void onPostExecute(Food[] foods) {
+    protected void onPostExecute(List<Food> foods) {
         listener.setLayoutAfterRequest(foods);
     }
 }

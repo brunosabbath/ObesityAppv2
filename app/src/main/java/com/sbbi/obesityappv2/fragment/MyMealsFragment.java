@@ -17,6 +17,9 @@ import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.recycleradapter.FoodRecyclerAdapter;
 import com.sbbi.obesityappv2.request.HttpRequestListFood;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by bsilva on 10/18/16.
@@ -32,7 +35,7 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
         View layout = inflater.inflate(R.layout.fragment_my_meals, container, false);
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_food);
-        foodAdapter = new FoodRecyclerAdapter(getActivity(), new Food[0], this);
+        foodAdapter = new FoodRecyclerAdapter(getActivity(), new ArrayList<Food>(), this);
         recyclerView.setAdapter(foodAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -58,12 +61,19 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
         Food f4 = new Food();
         f4.setName("Breakfast");
 
-        Food foods[] = new Food[4];
+        /*Food foods[] = new Food[4];
         foods[0] = f1;
         foods[1] = f2;
         foods[2] = f3;
-        foods[3] = f4;
-        setLayoutAfterRequest(foods);
+        foods[3] = f4;*/
+
+        List<Food> listFood = new ArrayList<Food>();
+        listFood.add(f1);
+        listFood.add(f2);
+        listFood.add(f3);
+        listFood.add(f4);
+
+        setLayoutAfterRequest(listFood);
         //new HttpRequestListFood(this).execute();
 
         return layout;
@@ -71,8 +81,8 @@ public class MyMealsFragment extends Fragment implements FoodInterf{
 
 
     @Override
-    public void setLayoutAfterRequest(Food[] food) {
-        if(food.length == 0) {
+    public void setLayoutAfterRequest(List<Food> food) {
+        if(food.size() == 0) {
             //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
             //errorMsg.setVisibility(View.VISIBLE);
         }

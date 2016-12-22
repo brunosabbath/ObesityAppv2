@@ -10,6 +10,9 @@ import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ResultActivity extends AppCompatActivity implements FoodInterf{
 
     private RecyclerView recyclerView;
@@ -28,8 +31,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
         //mLayoutManager = new LinearLayoutManager(this);
         //recyclerView.setLayoutManager(mLayoutManager);
 
-
-        foodAdapter = new FoodPredictionRecyclerAdapter(new Food[0], this);
+        foodAdapter = new FoodPredictionRecyclerAdapter(new ArrayList<Food>(), this);
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -40,11 +42,15 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
         Food f2 = new Food();
         f2.setName("pow");
 
-        Food foods[] = new Food[2];
+        /*Food foods[] = new Food[2];
         foods[0] = f1;
-        foods[1] = f2;
+        foods[1] = f2;*/
 
-        setLayoutAfterRequest(foods);
+        List<Food> listFood = new ArrayList<Food>();
+        listFood.add(f1);
+        listFood.add(f2);
+
+        setLayoutAfterRequest(listFood);
 
         Bundle extras = getIntent().getExtras();
         //ClassificationReturn classification = (ClassificationReturn) extras.get("result");
@@ -194,9 +200,9 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
     }
 
     @Override
-    public void setLayoutAfterRequest(Food[] food) {
+    public void setLayoutAfterRequest(List<Food> listFood) {
 
-        foodAdapter = new FoodPredictionRecyclerAdapter(food, this);
+        foodAdapter = new FoodPredictionRecyclerAdapter(listFood, this);
         recyclerView.setAdapter(foodAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
