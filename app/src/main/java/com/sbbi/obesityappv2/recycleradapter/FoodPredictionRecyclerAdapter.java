@@ -1,8 +1,8 @@
 package com.sbbi.obesityappv2.recycleradapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.activity.CorrectPrediction;
 import com.sbbi.obesityappv2.activity.ListNutrients;
+import com.sbbi.obesityappv2.activity.ResultActivity;
 import com.sbbi.obesityappv2.holder.FoodPredictedViewHolder;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
     //extends RecyclerView.Adapter<FoodViewHolder>
     private List<Food> food;
     private FoodInterf listener;
+    private final int CODE = 1;
 
     public FoodPredictionRecyclerAdapter(List<Food> food, FoodInterf listener) {
         this.listener = listener;
@@ -43,14 +46,11 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
     public void onBindViewHolder(final FoodPredictedViewHolder holder, final int position) {
         final Food current = food.get(position);
 
-        Log.i("WARNING", "POSITION: " + position);
-
         holder.getName().setText("Food predicted: " + current.getName());
 
         holder.getRemoveTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("PORRA", "deleting item " + position);
                 removeItem(position);
 
             }
@@ -68,7 +68,16 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.getContext(), CorrectPrediction.class);
-                holder.getContext().startActivity(intent);
+                //((Activity)holder.getContext()).startActivityForResult(intent, CODE);
+
+                Bundle bundle = new Bundle();
+                BundleCorrectFood myBundle = new BundleCorrectFood();
+                myBundle.setPosition(position);
+
+                intent.putExtra("myBundle", myBundle);
+
+                ((ResultActivity)holder.getContext()).startCorretPredictionActivity(intent);
+                //activityListener.onActivityResultMethod();
             }
         });
 

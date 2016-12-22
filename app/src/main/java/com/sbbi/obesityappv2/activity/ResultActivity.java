@@ -1,13 +1,16 @@
 package com.sbbi.obesityappv2.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
 import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -19,6 +22,8 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
     private FoodPredictionRecyclerAdapter foodAdapter;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private final int CODE = 1;
+    private List<Food> listFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
         foods[0] = f1;
         foods[1] = f2;*/
 
-        List<Food> listFood = new ArrayList<Food>();
+        listFood = new ArrayList<Food>();
         listFood.add(f1);
         listFood.add(f2);
 
@@ -199,12 +204,43 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf{
 
     }
 
+    public void startCorretPredictionActivity(Intent intent){
+        startActivityForResult(intent, CODE);
+    }
+
     @Override
     public void setLayoutAfterRequest(List<Food> listFood) {
 
+        this.listFood = listFood;
         foodAdapter = new FoodPredictionRecyclerAdapter(listFood, this);
         recyclerView.setAdapter(foodAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CODE){
+            if(resultCode == RESULT_OK){
+
+                BundleCorrectFood bundle = (BundleCorrectFood) data.getExtras().getSerializable("myBundle");
+
+                //String food = data.getStringExtra("foodName");
+                //int position = data.get("foodPosition"));
+
+                Food food = listFood.get(bundle.getPosition());
+                food.setName(bundle.getName());
+
+                listFood.get(bundle.getPosition()).setName(bundle.getName());
+
+                setLayoutAfterRequest(listFood);
+
+                Log.i("FOOD", bundle.getName() + " " + bundle.getPosition());
+            }
+        }
+    }
+
 }
