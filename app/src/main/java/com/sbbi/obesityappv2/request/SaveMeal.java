@@ -73,7 +73,7 @@ public class SaveMeal extends AsyncTask<List<Food>, Void, Void> {
         }
 
         try {
-            //restTemplate.postForObject(url, user, User.class);
+            restTemplate.postForObject(url, user, User.class);
         } catch (HttpClientErrorException e) {
             Log.e("ERROR", e.getLocalizedMessage(), e); //user not found
         } catch (ResourceAccessException e) {
