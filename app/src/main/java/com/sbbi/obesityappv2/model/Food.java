@@ -1,11 +1,12 @@
 package com.sbbi.obesityappv2.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by bsilva on 10/18/16.
  */
-public class Food {
+public class Food implements Serializable{
 
     private int id;
 

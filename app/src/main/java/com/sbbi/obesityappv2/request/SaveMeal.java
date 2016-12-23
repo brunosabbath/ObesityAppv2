@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.model.ResponseFood;
+import com.sbbi.obesityappv2.model.SendMeal;
 import com.sbbi.obesityappv2.model.User;
 
 import org.springframework.core.io.FileSystemResource;
@@ -32,48 +33,23 @@ import java.util.List;
  * Created by bsilva on 12/22/16.
  */
 
-public class SaveMeal extends AsyncTask<List<Food>, Void, Void> {
+public class SaveMeal extends AsyncTask<SendMeal, Void, Boolean> {
     @Override
-    protected Void doInBackground(List<Food>... params) {
+    protected Boolean doInBackground(SendMeal... params) {
 
         String url = "http://129.93.164.34:8080/meal";
 
-        /*RestTemplate restTemplate = new RestTemplate(true);
-
-        FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
-        formHttpMessageConverter.setCharset(Charset.forName("UTF8"));
-
-        restTemplate.getMessageConverters().add( formHttpMessageConverter );
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-        map.add("foods", params);
-
-        HttpHeaders imageHeaders = new HttpHeaders();
-        imageHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
-
-        ResponseEntity<ResponseFood> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, ResponseFood.class);*/
-
-        List<Food> listFood = new ArrayList<Food>();
-        listFood = params[0];
+        SendMeal mealToBeSent = params[0];
 
         RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
-        Food foods[] = new Food[listFood.size()];
-
-        for(int i = 0; i < listFood.size(); i++){
-            foods[i] = listFood.get(i);
-        }
 
         try {
-            restTemplate.postForObject(url, user, User.class);
+            restTemplate.postForObject(url, mealToBeSent, SendMeal.class);
+            return true;
         } catch (HttpClientErrorException e) {
             Log.e("ERROR", e.getLocalizedMessage(), e); //user not found
         } catch (ResourceAccessException e) {
@@ -81,6 +57,7 @@ public class SaveMeal extends AsyncTask<List<Food>, Void, Void> {
 
         }
 
-        return null;
+        return false;
     }
+
 }

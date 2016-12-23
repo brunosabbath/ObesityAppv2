@@ -13,6 +13,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.activity.PhotoMenuActivity;
 import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.recycleradapter.FoodRecyclerAdapter;
 import com.sbbi.obesityappv2.request.HttpRequestListFood;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * Created by bsilva on 10/18/16.
  */
-public class MyMealsFragment extends Fragment implements FoodInterf{
+public class MyMealsFragment extends Fragment implements TestFoodInterf{
 
     private FoodRecyclerAdapter foodAdapter;
     private RecyclerView recyclerView;

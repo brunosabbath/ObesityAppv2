@@ -3,6 +3,7 @@ package com.sbbi.obesityappv2.request;
 import android.os.AsyncTask;
 
 import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 
 import org.springframework.http.HttpHeaders;
@@ -18,9 +19,9 @@ import java.util.List;
  */
 public class HttpRequestListFood extends AsyncTask<Void, Void, List<Food>> {
 
-    private FoodInterf listener;
+    private TestFoodInterf listener;
 
-    public HttpRequestListFood(FoodInterf listener){
+    public HttpRequestListFood(TestFoodInterf listener){
         this.listener = listener;
     }
 

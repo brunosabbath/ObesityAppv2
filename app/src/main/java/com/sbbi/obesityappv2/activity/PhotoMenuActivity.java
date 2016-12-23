@@ -37,10 +37,10 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
     public void analyzeOnClick(View view){
 
         //API CALL
-        //new UploadImages(this).execute(paths);
+        new UploadImages(this).execute(paths);
 
-        Intent intent = new Intent(this, ResultActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, ResultActivity.class);
+        //startActivity(intent);
     }
 
     public void photoTopClick(View view){
@@ -88,14 +88,15 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
     }
 
     @Override
-    public void sendToResultScreen(ResponseFood responseFoodName) {
+    public void sendToResultScreen(ResponseFood responseFood) {
         Intent intent = new Intent(this, ResultActivity.class);
         Bundle extras = new Bundle();
         //extras.putSerializable("result",classificationReturn);
         //extras.putString("result", classificationReturn.getFood1Str());
-        extras.putStringArray("food1", responseFoodName.getFood1());
-        extras.putStringArray("food2", responseFoodName.getFood2());
-        extras.putStringArray("food3", responseFoodName.getFood3());
+        extras.putSerializable("result", responseFood);
+        //extras.putStringArray("food1", responseFoodName.getFood1());
+        //extras.putStringArray("food2", responseFoodName.getFood2());
+        //extras.putStringArray("food3", responseFoodName.getFood3());
         intent.putExtras(extras);
 
         startActivity(intent);

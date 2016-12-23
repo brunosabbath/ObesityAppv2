@@ -6,11 +6,9 @@ import com.sbbi.obesityappv2.model.ResponseFood;
 import java.util.List;
 
 /**
- * Created by bsilva on 10/18/16.
+ * Created by bsilva on 12/23/16.
  */
-public interface FoodInterf {
 
+public interface TestFoodInterf {
     public void setLayoutAfterRequest(List<Food> listFood);
-    //public void setLayoutAfterRequest(ResponseFood responseFood);
-
 }

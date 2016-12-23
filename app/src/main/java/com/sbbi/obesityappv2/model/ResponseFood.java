@@ -1,9 +1,11 @@
 package com.sbbi.obesityappv2.model;
 
+import java.io.Serializable;
+
 /**
  * Created by bsilva on 11/1/16.
  */
-public class ResponseFood {
+public class ResponseFood implements Serializable{
 
     private String food1[];
     private String food2[];

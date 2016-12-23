@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.holder.FoodViewHolder;
 import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
 
 import java.util.List;
@@ -20,9 +21,9 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodViewHolder>{
 
     private LayoutInflater inflater;
     private List<Food> food;
-    private FoodInterf listener;
+    private TestFoodInterf listener;
 
-    public FoodRecyclerAdapter(Context context, List<Food> food, FoodInterf listener){
+    public FoodRecyclerAdapter(Context context, List<Food> food, TestFoodInterf listener){
         this.listener = listener;
         this.food = food;
         this.inflater = LayoutInflater.from(context);

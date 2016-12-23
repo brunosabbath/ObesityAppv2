@@ -14,6 +14,7 @@ import com.sbbi.obesityappv2.activity.ResultActivity;
 import com.sbbi.obesityappv2.holder.FoodPredictedViewHolder;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
 
 import java.util.List;
@@ -25,14 +26,33 @@ import java.util.List;
 public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPredictedViewHolder>{
 
     //extends RecyclerView.Adapter<FoodViewHolder>
-    private List<Food> food;
+    private List<Food> listFood;
+    private List<Number> listWeight;
+    private List<List<String>> listAllpredictedFood;
+    private ResponseFood responseFood;
     private FoodInterf listener;
     private final int CODE = 1;
 
-    public FoodPredictionRecyclerAdapter(List<Food> food, FoodInterf listener) {
+    /*public FoodPredictionRecyclerAdapter(List<Food> food, FoodInterf listener) {
         this.listener = listener;
         this.food = food;
         //this.inflater = LayoutInflater.from(context);
+    }*/
+
+    //public FoodPredictionRecyclerAdapter(ResponseFood responseFood, FoodInterf listener) {
+    public FoodPredictionRecyclerAdapter(List<Food> food, FoodInterf listener) {
+        this.listener = listener;
+        this.listFood = food;
+        this.responseFood = responseFood;
+        //this.inflater = LayoutInflater.from(context);
+    }
+
+    public FoodPredictionRecyclerAdapter(List<Food> listFood, List<Number> listWeight, List<List<String>> listAllpredictedFood, FoodInterf listener) {
+        this.listener = listener;
+        this.listFood = listFood;
+        this.listWeight = listWeight;
+        this.listAllpredictedFood = listAllpredictedFood;
+        this.listener = listener;
     }
 
     @Override
@@ -44,9 +64,24 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
 
     @Override
     public void onBindViewHolder(final FoodPredictedViewHolder holder, final int position) {
-        final Food current = food.get(position);
+        final Food current = listFood.get(position);
+
+        /*if(position == 0){
+            holder.getName().setText("Food predicted: " + responseFood.getFood1()[0]);
+            holder.getWeight().setText("Weight: " + responseFood.getWeightFood1());
+        }
+        else if(position == 1){
+            holder.getName().setText("Food predicted: " + responseFood.getFood2()[0]);
+            holder.getWeight().setText("Weight: " + responseFood.getWeightFood2());
+        }
+        else if(position == 2){
+            holder.getName().setText("Food predicted: " + responseFood.getFood3()[0]);
+            holder.getWeight().setText("Weight: " + responseFood.getWeightFood3());
+        }*/
 
         holder.getName().setText("Food predicted: " + current.getName());
+        holder.getWeight().setText("" + listWeight.get(position));
+
 
         holder.getRemoveTextView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +120,27 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
 
     private void removeItem(int position) {
 
-        food.remove(position);
+        /*if(position == 0){
+            responseFood.setWeightFood1(0);
+            responseFood.setFood1(null);
+            responseFood.setNutrientsFood1(null);
+
+        }
+        else if(position == 1){
+            responseFood.setWeightFood2(0);
+            responseFood.setFood2(null);
+            responseFood.setNutrientsFood2(null);
+        }
+        else if(position == 2){
+            responseFood.setWeightFood3(0);
+            responseFood.setFood3(null);
+            responseFood.setNutrientsFood3(null);
+        }*/
+
+        listFood.remove(position);
+        listWeight.remove(position);
+        listAllpredictedFood.remove(position);
+
         //notifyDataSetChanged();
         notifyItemRemoved(position);//i've changed some items in the dataset, recycler, reload it
 
@@ -93,8 +148,8 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
 
     @Override
     public int getItemCount() {
-        if (food != null)
-            return food.size();
+        if (listFood != null)
+            return listFood.size();
         else
             return 0;
     }

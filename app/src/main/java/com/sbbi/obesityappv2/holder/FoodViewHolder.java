@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.interf.TestFoodInterf;
 
 /**
  * Created by bsilva on 10/18/16.
@@ -14,9 +15,9 @@ public class FoodViewHolder extends RecyclerView.ViewHolder{
 
     private TextView name;
     private View itemView;
-    private FoodInterf listener;
+    private TestFoodInterf listener;
 
-    public FoodViewHolder(View itemView, final FoodInterf listener) {
+    public FoodViewHolder(View itemView, final TestFoodInterf listener) {
         super(itemView);
         this.listener = listener;
         this.itemView = itemView;

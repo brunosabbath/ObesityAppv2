@@ -18,6 +18,7 @@ public class FoodPredictedViewHolder extends RecyclerView.ViewHolder {
 
     private TextView name;
     private TextView correctButton;
+    private TextView weight;
     private TextView listButton;
     private TextView removeButton;
     private View itemView;
@@ -32,11 +33,16 @@ public class FoodPredictedViewHolder extends RecyclerView.ViewHolder {
         correctButton = (TextView) itemView.findViewById(R.id.correct_prediction);
         listButton = (TextView) itemView.findViewById(R.id.list_nutrients);
         removeButton = (TextView) itemView.findViewById(R.id.remove_food);
+        weight = (TextView) itemView.findViewById(R.id.weight_food);
 
     }
 
     public Context getContext(){
         return itemView.getContext();
+    }
+
+    public TextView getWeight(){
+        return weight;
     }
 
     public TextView getPredictedClassesTextView(){
