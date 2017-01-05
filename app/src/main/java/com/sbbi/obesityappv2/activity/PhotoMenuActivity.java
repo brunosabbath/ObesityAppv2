@@ -1,5 +1,6 @@
 package com.sbbi.obesityappv2.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,22 +20,40 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
     private final int SIDE_2 = 2;
     private final int SIDE_3 = 3;
     private String paths[];
+    private ProgressDialog progressDialog;
+    private int typeMeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         Bundle extras = getIntent().getExtras();
+
+        typeMeal = (int) extras.get("typeMeal");
+
         paths = new String[4];
 
-        if(extras != null){
+        if(extras.getStringArray("photoPath") != null){
             paths = extras.getStringArray("photoPath");
         }
 
         setContentView(R.layout.activity_photo_menu);
     }
 
+    private void showProgressDialog() {
+        progressDialog = new ProgressDialog(PhotoMenuActivity.this);
+        progressDialog.setTitle("Analyzing");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    private void cancelProgressDialog() {
+        progressDialog.cancel();
+    }
+
     public void analyzeOnClick(View view){
+
+        showProgressDialog();
 
         //API CALL
         new UploadImages(this).execute(paths);
@@ -53,6 +72,7 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
         Intent intent = new Intent(this, CameraActivity.class);
         Bundle extras = new Bundle();
         extras.putStringArray("photoPath", paths);
+        extras.putInt("typeMeal", typeMeal);
         extras.putInt("position", 0);
         intent.putExtras(extras);
         startActivity(intent);
@@ -63,6 +83,7 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
         Intent intent = new Intent(this, CameraActivity.class);
         Bundle extras = new Bundle();
         extras.putStringArray("photoPath", paths);
+        extras.putInt("typeMeal", typeMeal);
         extras.putInt("position", 1);
         intent.putExtras(extras);
         startActivity(intent);
@@ -72,6 +93,7 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
         Intent intent = new Intent(this, CameraActivity.class);
         Bundle extras = new Bundle();
         extras.putStringArray("photoPath", paths);
+        extras.putInt("typeMeal", typeMeal);
         extras.putInt("position", 2);
         intent.putExtras(extras);
         startActivity(intent);
@@ -81,6 +103,7 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
         Intent intent = new Intent(this, CameraActivity.class);
         Bundle extras = new Bundle();
         extras.putStringArray("photoPath", paths);
+        extras.putInt("typeMeal", typeMeal);
         extras.putInt("position", 3);
         intent.putExtras(extras);
         startActivity(intent);
@@ -94,10 +117,13 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
         //extras.putSerializable("result",classificationReturn);
         //extras.putString("result", classificationReturn.getFood1Str());
         extras.putSerializable("result", responseFood);
+        extras.putInt("typeMeal", typeMeal);
         //extras.putStringArray("food1", responseFoodName.getFood1());
         //extras.putStringArray("food2", responseFoodName.getFood2());
         //extras.putStringArray("food3", responseFoodName.getFood3());
         intent.putExtras(extras);
+
+        cancelProgressDialog();
 
         startActivity(intent);
     }

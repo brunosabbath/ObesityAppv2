@@ -74,6 +74,7 @@ public class Camera2BasicFragment  extends Fragment
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
     private static int TYPE_PHOTO;
+    private static int TYPE_MEAL;
     private static String photoPath[] = new String[4];
 
     static {
@@ -426,8 +427,15 @@ public class Camera2BasicFragment  extends Fragment
         this.TYPE_PHOTO = type;
     }
 
+    public void setTypeMeal(int typeMeal) {
+        this.TYPE_MEAL = typeMeal;
+    }
+
     private int getTypePhoto(){
         return this.TYPE_PHOTO;
+    }
+    private int getTypeMeal(){
+        return this.TYPE_MEAL;
     }
 
     @Override
@@ -845,12 +853,14 @@ public class Camera2BasicFragment  extends Fragment
 
                     unlockFocus();
 
-                    //TODO
                     Intent intent = new Intent(getActivity(), PhotoMenuActivity.class);
 
-                    photoPath[getTypePhoto()] = mFile.toString();
+                    int typePhoto = getTypePhoto();
+
+                    photoPath[typePhoto] = mFile.toString();
 
                     intent.putExtra("photoPath", photoPath);
+                    intent.putExtra("typeMeal", getTypeMeal());
 
                     startActivity(intent);
                 }
@@ -926,6 +936,7 @@ public class Camera2BasicFragment  extends Fragment
                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
         }
     }
+
 
 
 

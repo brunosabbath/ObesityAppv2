@@ -1,17 +1,22 @@
 package com.sbbi.obesityappv2.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.activity.CameraActivity;
 import com.sbbi.obesityappv2.activity.PhotoMenuActivity;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
@@ -46,33 +51,61 @@ public class MyMealsFragment extends Fragment implements TestFoodInterf{
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),"Hey",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), PhotoMenuActivity.class));
+
+                String typeMeals[] = new String[] {"Breakfast", "Lunch", "Dinner", "Snack"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select meal");
+                builder.setItems(typeMeals, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //detabase starts with breakfast at position 1
+                        which = which + 1;
+
+                        Intent intent = new Intent(getActivity(), PhotoMenuActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putInt("typeMeal", which);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+
+                    }
+                });
+
+                builder.show();
+
             }
         });
 
-        Food f1 = new Food();
-        f1.setName("Breakfast");
-
-        Food f2 = new Food();
-        f2.setName("Lunch");
-
-        Food f3 = new Food();
-        f3.setName("Dinner");
-
-        Food f4 = new Food();
-        f4.setName("Breakfast");
-
-        /*Food foods[] = new Food[4];
-        foods[0] = f1;
-        foods[1] = f2;
-        foods[2] = f3;
-        foods[3] = f4;*/
-
         List<Food> listFood = new ArrayList<Food>();
-        listFood.add(f1);
-        listFood.add(f2);
-        listFood.add(f3);
-        listFood.add(f4);
+
+        if(ConnectionHelper.isInternetAvailable(getContext())){
+
+            Food f1 = new Food();
+            f1.setName("Breakfast");
+
+            Food f2 = new Food();
+            f2.setName("Lunch");
+
+            Food f3 = new Food();
+            f3.setName("Dinner");
+
+            Food f4 = new Food();
+            f4.setName("Breakfast");
+
+            /*Food foods[] = new Food[4];
+            foods[0] = f1;
+            foods[1] = f2;
+            foods[2] = f3;
+            foods[3] = f4;*/
+
+
+            listFood.add(f1);
+            listFood.add(f2);
+            listFood.add(f3);
+            listFood.add(f4);
+        }
+
 
         setLayoutAfterRequest(listFood);
         //new HttpRequestListFood(this).execute();
@@ -86,6 +119,7 @@ public class MyMealsFragment extends Fragment implements TestFoodInterf{
         if(food.size() == 0) {
             //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
             //errorMsg.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(), "No internet connectivity", Toast.LENGTH_LONG).show();
         }
         else{
             //errorMsg.setVisibility(View.INVISIBLE);

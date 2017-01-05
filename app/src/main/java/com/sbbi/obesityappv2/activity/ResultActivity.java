@@ -38,6 +38,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf {
     private List<String> listpredictedFood3;
     private List<List<String>> listAllpredictedFood;
     private ResponseFood responseFood;
+    private int typeMeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,8 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf {
 
         Bundle extras = getIntent().getExtras();
         responseFood = (ResponseFood) extras.get("result");
+        responseFood = (ResponseFood) extras.get("result");
+        typeMeal = (int) extras.getInt("typeMeal");
 
         recyclerView = (RecyclerView) findViewById(R.id.foodPrediction);
 
@@ -151,6 +154,8 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf {
     private SendMeal makeSendMeal(ResponseFood responseFood) {
 
         SendMeal meal = new SendMeal();
+
+        meal.setTypeMeal(typeMeal);
 
         meal.setFood1(responseFood.getFood1()[0]);
         meal.setFood2(responseFood.getFood2()[0]);

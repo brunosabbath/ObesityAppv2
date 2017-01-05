@@ -22,6 +22,7 @@ public class CameraActivity extends Activity {
             Bundle extras = getIntent().getExtras();
             camera2BasicFragment.setPhotoPath(extras.getStringArray("photoPath"));
             camera2BasicFragment.setTypePhoto(extras.getInt("position"));
+            camera2BasicFragment.setTypeMeal(extras.getInt("typeMeal"));
             getFragmentManager().beginTransaction().replace(R.id.container, camera2BasicFragment).commit();
         }
     }
