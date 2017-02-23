@@ -2,6 +2,7 @@ package com.sbbi.obesityappv2.request;
 
 import android.os.AsyncTask;
 
+import com.sbbi.obesityappv2.helper.Paths;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
@@ -28,7 +29,7 @@ public class HttpRequestListFood extends AsyncTask<Void, Void, List<Food>> {
     @Override
     protected List<Food> doInBackground(Void... params) {
 
-        String url = "http://129.93.164.34:8080/food";
+        String url = Paths.myPc + "food";
 
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());

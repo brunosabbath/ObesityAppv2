@@ -3,6 +3,7 @@ package com.sbbi.obesityappv2.request;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.sbbi.obesityappv2.helper.Paths;
 import com.sbbi.obesityappv2.model.SendMeal;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -19,7 +20,7 @@ public class SaveMeal extends AsyncTask<SendMeal, Void, Boolean> {
     @Override
     protected Boolean doInBackground(SendMeal... params) {
 
-        String url = "http://129.93.164.34:8080/meal";
+        String url = Paths.myPc + "/meal";
 
         SendMeal mealToBeSent = params[0];
 

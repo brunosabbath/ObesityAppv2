@@ -12,8 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.fitbit.authentication.AuthenticationHandler;
+import com.fitbit.authentication.AuthenticationManager;
+import com.fitbit.authentication.AuthenticationResult;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.activity.Test;
+import com.sbbi.obesityappv2.fitbit.FitbitAuthApplication;
+import com.sbbi.obesityappv2.fitbit.RootActivity;
 import com.sbbi.obesityappv2.request.FitbitApiHttp;
 
 import java.io.IOException;
@@ -24,26 +29,42 @@ import java.net.URL;
 /**
  * Created by bsilva on 10/18/16.
  */
-public class PreferencesFragment extends Fragment {
+public class PreferencesFragment extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_preferences, container, false);
+
+        Button btnGetActivity = (Button) layout.findViewById(R.id.btnGetActivity);
+        btnGetActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new FitbitApiHttp().execute();
+            }
+        });
+
+        boolean loggedIn = AuthenticationManager.isLoggedIn();
+        Log.i("LOGGED",loggedIn+"");
 
         Button btnFitbit = (Button) layout.findViewById(R.id.btnFitbit);
         btnFitbit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "api", Toast.LENGTH_SHORT).show();
-                new FitbitApiHttp().execute();
+
+                Intent i = new Intent(getActivity(), RootActivity.class);
+                startActivity(i);
+
+                //Toast.makeText(getActivity(), "api", Toast.LENGTH_SHORT).show();
+                //new FitbitApiHttp().execute();
 
                 /*String url = "https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=227YVJ&redirect_uri=fitbittester://logincallback&scope=activity&expires_in=604800&prompt=login";
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
-                */
+                customTabsIntent.launchUrl(getActivity(), Uri.parse(url));*/
 
-                //Intent i = new Intent(getActivity(), Test.class);
-                //startActivity(i);
+                //dont need this anymore, once the page will be loaded by launchUrl
+                /*
+                Intent i = new Intent(getActivity(), Test.class);
+                startActivity(i);*/
 
             }
         });

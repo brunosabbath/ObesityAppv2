@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,5 +16,14 @@
         android:text="fitbit"
         android:id="@+id/btnFitbit"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-</FrameLayout>
+        android:text="get activity"
+        android:id="@+id/btnGetActivity"
+        android:layout_below="@+id/btnFitbit"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+</RelativeLayout>

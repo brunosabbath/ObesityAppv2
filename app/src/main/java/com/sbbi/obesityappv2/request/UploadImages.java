@@ -2,6 +2,7 @@ package com.sbbi.obesityappv2.request;
 
 import android.os.AsyncTask;
 
+import com.sbbi.obesityappv2.helper.Paths;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.model.ResponseFood;
 
@@ -39,7 +40,7 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
     @Override
     protected ResponseFood doInBackground(String[]... strings) {
 
-        String url = "http://129.93.164.34:8080/pictures";
+        String url = Paths.myPc + "pictures";
 
         String path[] = strings[0];
 

@@ -62,6 +62,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf {
         Food food2 = new Food();
         food2.setName(responseFood.getFood2()[0]);
 
+
         Food food3 = new Food();
         food3.setName(responseFood.getFood3()[0]);
 

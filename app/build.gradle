@@ -23,10 +23,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':fitbitapi')
+    compile project(':fitbitauth')
     testCompile 'junit:junit:4.12'
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.android.support:cardview-v7:24.2.1'
