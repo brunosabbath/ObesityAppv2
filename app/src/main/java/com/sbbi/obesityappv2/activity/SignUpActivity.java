@@ -3,13 +3,19 @@ package com.sbbi.obesityappv2.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.DBHelper;
+import com.sbbi.obesityappv2.interf.UserListener;
+import com.sbbi.obesityappv2.model.User;
+import com.sbbi.obesityappv2.request.SignUpHttp;
+import com.sbbi.obesityappv2.sqlite.ObesityDbDao;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements UserListener {
 
     private EditText name;
     private EditText email;
@@ -33,7 +39,10 @@ public class SignUpActivity extends AppCompatActivity {
                 password = (EditText) findViewById(R.id.input_password);
                 name = (EditText) findViewById(R.id.input_name);
 
-                //TODO go to api end register user
+                User user = new User();
+                user.setName(name.getText().toString()).setEmail(email.getText().toString()).setPassword(password.getText().toString());
+                callApi(user);
+
             }
         });
 
@@ -46,8 +55,23 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    private void callApi(User user) {
+        new SignUpHttp(this).execute(user);
+    }
+
     private void returnLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void userInfo(User user) {
+        Log.i("user", user+"");
+        ObesityDbDao dao = new ObesityDbDao(this);
+        if(dao.isEmpty()){
+            dao.addUser(user);
+
+            //startActivity(new Intent(this, MainActivity.class));
+        }
     }
 }
