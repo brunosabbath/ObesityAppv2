@@ -42,7 +42,6 @@ public class SignUpActivity extends AppCompatActivity implements UserListener {
                 User user = new User();
                 user.setName(name.getText().toString()).setEmail(email.getText().toString()).setPassword(password.getText().toString());
                 callApi(user);
-
             }
         });
 
@@ -66,12 +65,11 @@ public class SignUpActivity extends AppCompatActivity implements UserListener {
 
     @Override
     public void userInfo(User user) {
-        Log.i("user", user+"");
+
         ObesityDbDao dao = new ObesityDbDao(this);
         if(dao.isEmpty()){
             dao.addUser(user);
-
-            //startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 }

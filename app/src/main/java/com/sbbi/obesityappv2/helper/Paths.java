@@ -8,5 +8,6 @@ public class Paths {
 
     public static String myPc = "http://129.93.164.34:5150";
     public static String signup = myPc + "/user/signup";
+    public static String login = myPc + "/login";
 
 }

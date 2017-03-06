@@ -27,9 +27,11 @@ import com.fitbit.authentication.AuthenticationHandler;
 import com.fitbit.authentication.AuthenticationManager;
 import com.fitbit.authentication.AuthenticationResult;
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.activity.LoginActivity;
 import com.sbbi.obesityappv2.activity.Test;
 import com.sbbi.obesityappv2.fitbit.FitbitAuthApplication;
 import com.sbbi.obesityappv2.fitbit.RootActivity;
+import com.sbbi.obesityappv2.helper.LogoutHelper;
 import com.sbbi.obesityappv2.request.FitbitApiHttp;
 
 import java.io.IOException;
@@ -55,6 +57,15 @@ public class PreferencesFragment extends Fragment {
             public void onClick(View v) {
                 boolean loggedIn = AuthenticationManager.isLoggedIn();
                 Log.i("LOGGED", loggedIn + "");
+            }
+        });
+
+        Button btnLogout = (Button) layout.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+
             }
         });
 
@@ -120,6 +131,12 @@ public class PreferencesFragment extends Fragment {
         });
 
         return layout;
+    }
+
+    private void logout() {
+
+        LogoutHelper.logout(getContext());
+        startActivity(new Intent(getActivity(), LoginActivity.class));
     }
 
     private void configureButton() {

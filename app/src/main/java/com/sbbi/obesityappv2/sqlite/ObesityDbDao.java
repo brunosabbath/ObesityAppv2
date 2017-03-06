@@ -31,7 +31,7 @@ public class ObesityDbDao {
     public boolean isEmpty(){
 
         boolean isEmpty = true;
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = helper.getReadableDatabase();
 
         //String[] columns = {ObesityDb.Obesity._ID};
         String[] columns = {ObesityDb.Obesity.USER_ID, ObesityDb.Obesity.USER_NAME};
@@ -46,18 +46,21 @@ public class ObesityDbDao {
 
     public User getUser(){
 
-        SQLiteDatabase db = helper.getWritableDatabase();
-        User user = new User();
+        SQLiteDatabase db = helper.getReadableDatabase();
+        User user = null;
 
         String[] columns = {ObesityDb.Obesity.USER_ID, ObesityDb.Obesity.USER_NAME};
         Cursor cursor = db.query(ObesityDb.Obesity.TABLE_NAME, columns, null, null, null, null, null);
         //Cursor cursor = db.query(ObesityDb.Obesity.TABLE_NAME, null, null, null, null, null, null);
 
-        if(cursor.moveToNext()){
-            Log.i("text", "has user");
-            Log.i("text", "user: " + cursor.getString(USER_NAME) + " " + cursor.getInt(USER_ID));
-            /*user.setId(cursor.getInt(USER_ID));
-            user.setName(cursor.getString(USER_NAME));*/
+        while(cursor.moveToNext()){
+
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+
+            user = new User();
+            user.setId(id);
+            user.setName(name);
         }
 
         return user;
@@ -103,9 +106,16 @@ public class ObesityDbDao {
 
         values.put(ObesityDb.Obesity.USER_ID, user.getId());
         values.put(ObesityDb.Obesity.USER_NAME, user.getName());
+        values.put(ObesityDb.Obesity.FINGER_HEIGHT, -1);
+        values.put(ObesityDb.Obesity.FINGER_WIDTH, -1);
 
         long newRow = db.insert(ObesityDb.Obesity.TABLE_NAME, null, values);
-
     }
 
+    public void delete() {
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("DELETE FROM " + ObesityDb.Obesity.TABLE_NAME);
+
+    }
 }
