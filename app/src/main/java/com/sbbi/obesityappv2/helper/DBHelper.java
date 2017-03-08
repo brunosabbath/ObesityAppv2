@@ -12,7 +12,7 @@ import com.sbbi.obesityappv2.sqlite.ObesityDb;
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "obesity.db";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + ObesityDb.Obesity.TABLE_NAME + " (" +

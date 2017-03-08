@@ -1,6 +1,8 @@
 package com.sbbi.obesityappv2.activity;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +12,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.error.EditTextError;
+import com.sbbi.obesityappv2.helper.PasswordHelper;
+import com.sbbi.obesityappv2.helper.VerifyHelper;
 import com.sbbi.obesityappv2.interf.UserListener;
 import com.sbbi.obesityappv2.model.User;
 import com.sbbi.obesityappv2.request.LoginHttp;
 import com.sbbi.obesityappv2.sqlite.ObesityDbDao;
 
-public class LoginActivity extends AppCompatActivity implements UserListener {
+public class LoginActivity extends AppCompatActivity implements UserListener, EditTextError {
 
     private EditText email;
     private EditText password;
@@ -41,10 +46,18 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
                 email = (EditText) findViewById(R.id.input_email);
                 password = (EditText) findViewById(R.id.input_password);
 
-                User user = new User();
-                user.setEmail(email.getText().toString().trim());
-                user.setPassword(password.getText().toString().trim());
-                callApi(user);
+                if(VerifyHelper.isValidEditText(email) && VerifyHelper.isValidEditText(password)){
+                    String passwordStr = password.getText().toString().trim();
+
+                    User user = new User();
+                    user.setEmail(email.getText().toString().trim());
+                    user.setPassword(PasswordHelper.securePassword(passwordStr));
+                    callApi(user);
+                }
+                else{
+                    showMandatoryFieldsMessage("All fields are required");
+                }
+
 
             }
         });
@@ -93,11 +106,31 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
     public void userInfo(User user) {
 
         if(user == null){
-            Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_LONG).show();
+            showUserNotFound();
         }else{
             insertUserIdDb(user);
             goToMainActivity();
         }
 
+    }
+
+    private final Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.arg1 == 1)
+                Toast.makeText(getApplicationContext(),"User not found", Toast.LENGTH_LONG).show();
+        }
+    };
+
+    private void showUserNotFound() {
+        //Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_LONG).show();
+        Message msg = handler.obtainMessage();
+        msg.arg1 = 1;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showMandatoryFieldsMessage(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 }
