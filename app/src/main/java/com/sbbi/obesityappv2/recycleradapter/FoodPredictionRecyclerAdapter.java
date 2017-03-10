@@ -91,6 +91,8 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
             }
         });
 
+
+
         holder.getListNutrientsTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

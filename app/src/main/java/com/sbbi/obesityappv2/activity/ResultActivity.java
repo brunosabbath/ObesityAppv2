@@ -2,6 +2,8 @@ package com.sbbi.obesityappv2.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,17 +17,20 @@ import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.interf.RedirectListener;
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.model.SendMeal;
+import com.sbbi.obesityappv2.model.User;
 import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
 import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
 import com.sbbi.obesityappv2.request.SaveMeal;
+import com.sbbi.obesityappv2.sqlite.ObesityDbDao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultActivity extends AppCompatActivity implements FoodInterf {
+public class ResultActivity extends AppCompatActivity implements FoodInterf, RedirectListener {
 
     private RecyclerView recyclerView;
     private FoodPredictionRecyclerAdapter foodAdapter;
@@ -138,12 +143,15 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf {
 
         switch (item.getItemId()) {
             case R.id.save_meal:
-                Toast.makeText(getApplicationContext(), "button pressed", Toast.LENGTH_LONG).show();
 
                 //new SaveMeal().execute(listFood);
 
                 SendMeal sendMeal = makeSendMeal(responseFood);
-                new SaveMeal().execute(sendMeal);
+
+                int userId = getUserId();
+                sendMeal.setUserId(userId);
+
+                new SaveMeal(this).execute(sendMeal);
 
                 return true;
             default:
@@ -229,4 +237,38 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf {
         }
     }
 
+    public int getUserId() {
+        ObesityDbDao dao = new ObesityDbDao(this);
+        User user = dao.getUser();
+        return user.getId();
+    }
+
+    private final Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.arg1 == 1)
+                Toast.makeText(getApplicationContext(),"Meal has been added", Toast.LENGTH_SHORT).show();
+            else if(msg.arg1 == 1)
+                Toast.makeText(getApplicationContext(),"Error to save meal", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    public void redirectToActivity(boolean done) {
+
+        Message msg = handler.obtainMessage();
+
+        if(done){
+            msg.arg1 = 1;
+            handler.sendMessage(msg);
+
+        }
+        else{
+            msg.arg1 = 2;
+            handler.sendMessage(msg);
+        }
+
+        startActivity(new Intent(this, MainActivity.class));
+
+    }
 }

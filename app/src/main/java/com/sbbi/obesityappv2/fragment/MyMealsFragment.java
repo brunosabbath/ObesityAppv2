@@ -18,10 +18,16 @@ import com.sbbi.obesityappv2.activity.CameraActivity;
 import com.sbbi.obesityappv2.activity.PhotoMenuActivity;
 import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.interf.FoodInterf;
+import com.sbbi.obesityappv2.interf.MealPojoListener;
 import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.User;
+import com.sbbi.obesityappv2.model.pojo.MealPojo;
 import com.sbbi.obesityappv2.recycleradapter.FoodRecyclerAdapter;
+import com.sbbi.obesityappv2.recycleradapter.MealRecyclerAdapter;
+import com.sbbi.obesityappv2.request.HttpListMealUser;
 import com.sbbi.obesityappv2.request.HttpRequestListFood;
+import com.sbbi.obesityappv2.sqlite.ObesityDbDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +36,10 @@ import java.util.List;
 /**
  * Created by bsilva on 10/18/16.
  */
-public class MyMealsFragment extends Fragment implements TestFoodInterf{
+public class MyMealsFragment extends Fragment implements MealPojoListener{
 
-    private FoodRecyclerAdapter foodAdapter;
+    //private FoodRecyclerAdapter foodAdapter;
+    private MealRecyclerAdapter mealAdapter;
     private RecyclerView recyclerView;
     private FoodInterf listener;
     private FloatingActionButton button;
@@ -41,12 +48,17 @@ public class MyMealsFragment extends Fragment implements TestFoodInterf{
         View layout = inflater.inflate(R.layout.fragment_my_meals, container, false);
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_food);
-        foodAdapter = new FoodRecyclerAdapter(getActivity(), new ArrayList<Food>(), this);
-        recyclerView.setAdapter(foodAdapter);
+
+        //foodAdapter = new FoodRecyclerAdapter(getActivity(), new ArrayList<Food>(), this);
+        mealAdapter = new MealRecyclerAdapter(getActivity(), new ArrayList<MealPojo>(), this);
+
+        recyclerView.setAdapter(mealAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //button options
         button = (FloatingActionButton) layout.findViewById(R.id.buttonPlus);
 
+        //onclick floating button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +93,11 @@ public class MyMealsFragment extends Fragment implements TestFoodInterf{
 
         if(ConnectionHelper.isInternetAvailable(getContext())){
 
-            Food f1 = new Food();
+            int userId = getUserId();
+
+            new HttpListMealUser(this).execute(userId);
+
+            /*Food f1 = new Food();
             f1.setName("Breakfast");
 
             Food f2 = new Food();
@@ -93,33 +109,50 @@ public class MyMealsFragment extends Fragment implements TestFoodInterf{
             Food f4 = new Food();
             f4.setName("Breakfast");
 
-            /*Food foods[] = new Food[4];
-            foods[0] = f1;
-            foods[1] = f2;
-            foods[2] = f3;
-            foods[3] = f4;*/
-
-
             listFood.add(f1);
             listFood.add(f2);
             listFood.add(f3);
-            listFood.add(f4);
+            listFood.add(f4);*/
+        }
+        else{
+            Toast.makeText(getContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
         }
 
 
-        setLayoutAfterRequest(listFood);
+        //setLayoutAfterRequest(listFood);
         //new HttpRequestListFood(this).execute();
 
         return layout;
     }
 
 
+    public int getUserId() {
+        ObesityDbDao dao = new ObesityDbDao(getContext());
+        User user = dao.getUser();
+        return user.getId();
+    }
+
     @Override
+    public void setLayoutAfterRequest(List<MealPojo> listMeal) {
+        if(listMeal.size() == 0) {
+            //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
+            //errorMsg.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(), "No meals have been found", Toast.LENGTH_LONG).show();
+        }
+        else{
+            //errorMsg.setVisibility(View.INVISIBLE);
+            mealAdapter = new MealRecyclerAdapter(getActivity(), listMeal, this);
+            recyclerView.setAdapter(mealAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+    }
+
+    /*@Override
     public void setLayoutAfterRequest(List<Food> food) {
         if(food.size() == 0) {
             //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
             //errorMsg.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), "No internet connectivity", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "No meals have been found", Toast.LENGTH_LONG).show();
         }
         else{
             //errorMsg.setVisibility(View.INVISIBLE);
@@ -127,9 +160,6 @@ public class MyMealsFragment extends Fragment implements TestFoodInterf{
             recyclerView.setAdapter(foodAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
+    }*/
 
-        /*if(swipeRefresh.isRefreshing()){
-            swipeRefresh.setRefreshing(false);
-        }*/
-    }
 }
