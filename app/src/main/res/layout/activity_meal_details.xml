@@ -7,17 +7,9 @@
     android:layout_height="match_parent"
     tools:context="com.sbbi.obesityappv2.activity.MealDetailsActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/meal_details_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/meal_details_id"
+        android:id="@+id/recycler_food_details"
         android:background="@color/button_material_light"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />

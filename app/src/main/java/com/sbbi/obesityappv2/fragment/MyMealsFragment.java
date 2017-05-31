@@ -55,14 +55,13 @@ public class MyMealsFragment extends Fragment implements MealPojoListener{
         recyclerView.setAdapter(mealAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //button options
+
+        //floating button
         button = (FloatingActionButton) layout.findViewById(R.id.buttonPlus);
 
-        //onclick floating button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getActivity(),"Hey",Toast.LENGTH_SHORT).show();
 
                 String typeMeals[] = new String[] {"Breakfast", "Lunch", "Dinner", "Snack"};
 
@@ -80,12 +79,10 @@ public class MyMealsFragment extends Fragment implements MealPojoListener{
                         extras.putInt("typeMeal", which);
                         intent.putExtras(extras);
                         startActivity(intent);
-
                     }
                 });
 
                 builder.show();
-
             }
         });
 

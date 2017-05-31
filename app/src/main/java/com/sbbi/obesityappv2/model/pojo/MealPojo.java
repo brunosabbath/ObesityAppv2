@@ -13,11 +13,19 @@ import java.util.List;
 public class MealPojo implements Serializable{
 
     private String type;
-
+    private boolean eatingOutside;
     private List<FoodPojo> listFood;
 
     public MealPojo(){
         listFood = new ArrayList<FoodPojo>();
+    }
+
+    public void setEatingOutside(boolean eatingOutside){
+        this.eatingOutside = eatingOutside;
+    }
+
+    public boolean isEatingOutside(){
+        return eatingOutside;
     }
 
     public String getType() {
