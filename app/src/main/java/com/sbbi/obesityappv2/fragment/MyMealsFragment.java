@@ -91,30 +91,11 @@ public class MyMealsFragment extends Fragment implements MealPojoListener{
         if(ConnectionHelper.isInternetAvailable(getContext())){
 
             int userId = getUserId();
-
             new HttpListMealUser(this).execute(userId);
-
-            /*Food f1 = new Food();
-            f1.setName("Breakfast");
-
-            Food f2 = new Food();
-            f2.setName("Lunch");
-
-            Food f3 = new Food();
-            f3.setName("Dinner");
-
-            Food f4 = new Food();
-            f4.setName("Breakfast");
-
-            listFood.add(f1);
-            listFood.add(f2);
-            listFood.add(f3);
-            listFood.add(f4);*/
         }
         else{
             Toast.makeText(getContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
         }
-
 
         //setLayoutAfterRequest(listFood);
         //new HttpRequestListFood(this).execute();

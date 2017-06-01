@@ -96,7 +96,13 @@ public class FoodPredictionRecyclerAdapter extends RecyclerView.Adapter<FoodPred
         holder.getListNutrientsTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bundle extras = new Bundle();
+                extras.putSerializable("food", listFood.get(position));
+
                 Intent intent = new Intent(holder.getContext(), ListNutrients.class);
+                intent.putExtras(extras);
+
                 holder.getContext().startActivity(intent);
             }
         });

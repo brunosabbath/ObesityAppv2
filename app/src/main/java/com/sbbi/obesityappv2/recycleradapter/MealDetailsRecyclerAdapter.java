@@ -39,13 +39,14 @@ public class MealDetailsRecyclerAdapter extends RecyclerView.Adapter<FoodDetails
         final FoodPojo food = listFood.get(position);
 
         holder.getNameFood().setText(food.getName());
-        holder.getCarbohydrateFood().setText(food.getCarbohydrate() + " g");
-        holder.getEnergyFood().setText(food.getEnergy() + " kcal");
-        holder.getFiberFood().setText(food.getFiber() + " g");
-        holder.getLipidFood().setText(food.getLipid() + " g");
-        holder.getProteinFood().setText(food.getProtein() + " g");
-        holder.getSugarFood().setText(food.getSugar() + " g");
-        holder.getGramFood().setText(food.getGrams() + " g");
+        holder.getCarbohydrateFood().setText("Carbohydrate: " + food.getCarbohydrate() + " g");
+        holder.getEnergyFood().setText("Energy: " + food.getEnergy() + " kcal");
+        holder.getFiberFood().setText("Fiber: " + food.getFiber() + " g");
+        holder.getLipidFood().setText("Lipids: " + food.getLipid() + " g");
+        holder.getProteinFood().setText("Protein: " + food.getProtein() + " g");
+        holder.getSugarFood().setText("Sugar: " + food.getSugar() + " g");
+        holder.getGramFood().setText("Grams: " + food.getGrams() + " g");
+        holder.getCholesterol().setText("Grams: " + food.getCholesterol() + " g");
 
     }
 

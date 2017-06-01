@@ -21,6 +21,7 @@ public class FoodDetailsViewHolder extends RecyclerView.ViewHolder {
     private TextView protein;
     private TextView sugar;
     private TextView gram;
+    private TextView cholesterol;
 
     public FoodDetailsViewHolder(View itemView) {
         super(itemView);
@@ -34,6 +35,7 @@ public class FoodDetailsViewHolder extends RecyclerView.ViewHolder {
         protein = (TextView) itemView.findViewById(R.id.food_protein_detail);
         sugar = (TextView) itemView.findViewById(R.id.food_sugar_detail);
         gram = (TextView) itemView.findViewById(R.id.food_grams_detail);
+        cholesterol = (TextView) itemView.findViewById(R.id.food_cholesterol_detail);
 
     }
 
@@ -45,5 +47,6 @@ public class FoodDetailsViewHolder extends RecyclerView.ViewHolder {
     public TextView getProteinFood(){return protein;}
     public TextView getSugarFood(){return sugar;}
     public TextView getGramFood(){return gram;}
+    public TextView getCholesterol(){return cholesterol;}
 
 }

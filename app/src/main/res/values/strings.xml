@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">ObesityAppv2</string>
+    <string name="app_name">sbbi</string>
 
     <string-array name="tabs">
         <item>My Meals</item>
+        <item>Insights</item>
         <item>Preferences</item>
     </string-array>
 

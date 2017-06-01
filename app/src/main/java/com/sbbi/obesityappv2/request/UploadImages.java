@@ -78,7 +78,7 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
         else
             map.add("file4", new FileSystemResource(path[TOP]));
 
-        map.add("id", 5);
+        //map.add("id", 5);
 
         HttpHeaders imageHeaders = new HttpHeaders();
         imageHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);

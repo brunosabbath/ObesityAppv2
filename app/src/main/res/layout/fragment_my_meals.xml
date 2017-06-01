@@ -1,4 +1,3 @@
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -29,8 +28,5 @@
         fab_colorNormal="@color/colorAccent"
         fab_colorPressed="@color/colorAccent"
         fab_colorRipple="@color/colorAccent" />
-
-
-
 
 </RelativeLayout>

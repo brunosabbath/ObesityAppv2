@@ -30,6 +30,11 @@ import com.sbbi.obesityappv2.sqlite.ObesityDbDao;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classification results
+ *
+ *
+ */
 public class ResultActivity extends AppCompatActivity implements FoodInterf, RedirectListener {
 
     private RecyclerView recyclerView;

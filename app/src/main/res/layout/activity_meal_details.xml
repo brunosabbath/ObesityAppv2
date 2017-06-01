@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -11,7 +11,102 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_food_details"
         android:background="@color/button_material_light"
-        android:layout_height="match_parent"
+        android:layout_height="800px"
         android:layout_width="match_parent" />
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_below="@+id/recycler_food_details"
+        android:layout_width="match_parent"
+        android:layout_height="800px">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nutrient_breakdown_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="20dp"
+                android:text="Nutrient beakdown"
+                android:layout_alignBottom="@+id/recycler_food_details"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/total_calories_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="Total calories: "
+                android:layout_alignBottom="@+id/nutrient_breakdown_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/carbs_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="carbs"
+                android:layout_alignBottom="@+id/total_calories_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/weight_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="weight"
+                android:layout_alignBottom="@+id/carbs_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/fiber_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="fiber"
+                android:layout_alignBottom="@+id/weight_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lipids_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="lipids"
+                android:layout_alignBottom="@+id/fiber_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/protein_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="protein"
+                android:layout_alignBottom="@+id/lipids_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/sugar_label"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="16dp"
+                android:text="sugar"
+                android:layout_alignBottom="@+id/protein_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

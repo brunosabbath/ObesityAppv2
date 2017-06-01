@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.fragment.InsightsFragment;
 import com.sbbi.obesityappv2.fragment.MyMealsFragment;
 import com.sbbi.obesityappv2.fragment.PreferencesFragment;
 import com.sbbi.obesityappv2.tabs.SlidingTabLayout;
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     class MyPageAdapter extends FragmentPagerAdapter {
 
-        private final int TOTAL_TABS = 2, MY_MEALS = 0, PREFERENCES = 1;
+        private final int TOTAL_TABS = 3, MY_MEALS = 0, INSIGHTS = 1, PREFERENCES = 2;
         private String[] tabs;
 
         public MyPageAdapter(FragmentManager fm) {
@@ -142,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
                 return new MyMealsFragment();
             else if(position == PREFERENCES)
                 return new PreferencesFragment();
-
+            else if(position == INSIGHTS)
+                return new InsightsFragment();
 
             return null;
         }
