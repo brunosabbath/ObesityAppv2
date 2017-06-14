@@ -11,14 +11,7 @@
         android:id="@+id/insight_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get insights"/>
+        android:text="Get insights and recommendations"/>
 
-    <Button
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_alignBottom="@+id/insight_button"
-        android:id="@+id/recommendation_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get recommendations"/>
 
 </LinearLayout>
