@@ -10,5 +10,6 @@ public class Paths {
     public static String signup = myPc + "/user/signup";
     public static String login = myPc + "/login";
     public static String meal = myPc + "/meal/user/";
+    public static String recommendation = myPc + "/meal/recommendation";
 
 }

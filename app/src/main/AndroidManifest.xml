@@ -86,7 +86,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SignUpActivity" />
-        <activity android:name=".activity.MealDetailsActivity"></activity>
+        <activity android:name=".activity.MealDetailsActivity" />
+        <activity android:name=".activity.InsightActivity"></activity>
     </application>
 
 </manifest>
