@@ -8,21 +8,34 @@ import java.util.List;
 public class User {
 
     private int id;
-
     private String email;
-
     private String height;
-
     private String name;
-
     private String password;
-
     private double weight;
+    private double fingerLength;
+    private double fingerWidth;
 
     //bi-directional many-to-one association to Meal
     private List<Meal> meals;
 
     public User() {
+    }
+
+    public double getFingerLength() {
+        return fingerLength;
+    }
+
+    public void setFingerLength(double length) {
+        this.fingerLength = length;
+    }
+
+    public double getFingerWidth() {
+        return fingerWidth;
+    }
+
+    public void setFingerWidth(double width) {
+        this.fingerWidth = width;
     }
 
     public int getId() {
@@ -38,7 +51,6 @@ public class User {
     }
 
     public User setEmail(String email) {
-
         this.email = email;
         return this;
     }

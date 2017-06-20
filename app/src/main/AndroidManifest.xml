@@ -87,7 +87,8 @@
         </activity>
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.MealDetailsActivity" />
-        <activity android:name=".activity.InsightActivity"></activity>
+        <activity android:name=".activity.InsightActivity" />
+        <activity android:name=".activity.FingerActivity"></activity>
     </application>
 
 </manifest>

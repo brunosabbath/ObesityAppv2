@@ -31,6 +31,7 @@ import com.fitbit.authentication.AuthenticationHandler;
 import com.fitbit.authentication.AuthenticationManager;
 import com.fitbit.authentication.AuthenticationResult;
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.activity.FingerActivity;
 import com.sbbi.obesityappv2.activity.LoginActivity;
 import com.sbbi.obesityappv2.activity.Test;
 import com.sbbi.obesityappv2.fitbit.FitbitAuthApplication;
@@ -83,6 +84,16 @@ public class PreferencesFragment extends Fragment implements ResourceLoadedHandl
                 Intent i = new Intent(getActivity(), RootActivity.class);
                 startActivity(i);
 
+            }
+        });
+
+        Button btnFinger = (Button) layout.findViewById(R.id.btnFinger);
+        btnFinger.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), FingerActivity.class);
+                startActivity(i);
             }
         });
 
