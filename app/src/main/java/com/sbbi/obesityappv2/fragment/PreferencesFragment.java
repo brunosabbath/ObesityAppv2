@@ -83,7 +83,6 @@ public class PreferencesFragment extends Fragment implements ResourceLoadedHandl
                 //It must redirect back to this fragment / or to the main activity
                 Intent i = new Intent(getActivity(), RootActivity.class);
                 startActivity(i);
-
             }
         });
 

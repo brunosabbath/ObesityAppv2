@@ -40,10 +40,8 @@ public class FingerActivity extends AppCompatActivity implements FingerListener 
                 int userId = GetUserIdHelper.getUserId(getApplicationContext());
 
                 callApi(length, width, (double)userId);
-
             }
         });
-
     }
 
     private void callApi(double length, double width, double userId) {
@@ -52,6 +50,7 @@ public class FingerActivity extends AppCompatActivity implements FingerListener 
 
     @Override
     public void info(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        finish();
     }
 }

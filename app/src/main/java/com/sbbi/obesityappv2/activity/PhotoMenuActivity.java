@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.request.UploadImages;
@@ -55,8 +56,10 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
 
         showProgressDialog();
 
+        int userId = GetUserIdHelper.getUserId(getApplicationContext());
+
         //API CALL
-        new UploadImages(this).execute(paths);
+        new UploadImages(this, userId).execute(paths);
 
         //Intent intent = new Intent(this, ResultActivity.class);
         //startActivity(intent);
@@ -76,7 +79,6 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
         extras.putInt("position", 0);
         intent.putExtras(extras);
         startActivity(intent);
-
     }
 
     public void photoSide1Click(View view){

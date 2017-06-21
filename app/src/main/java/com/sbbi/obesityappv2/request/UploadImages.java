@@ -2,6 +2,7 @@ package com.sbbi.obesityappv2.request;
 
 import android.os.AsyncTask;
 
+import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.helper.Paths;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.model.ResponseFood;
@@ -31,16 +32,17 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
     private final int SIDE_1 = 1;
     private final int SIDE_2 = 2;
     private final int SIDE_3 = 3;
+    private int userId;
 
-
-    public UploadImages(ClassificationInterf listener){
+    public UploadImages(ClassificationInterf listener, int userId){
         this.listener = listener;
+        this.userId = userId;
     }
 
     @Override
     protected ResponseFood doInBackground(String[]... strings) {
 
-        String url = Paths.myPc + "pictures";
+        String url = Paths.myPc + "/pictures/" + userId;
 
         String path[] = strings[0];
 
@@ -54,9 +56,6 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-
-        MultiValueMap<String, Object> user = new LinkedMultiValueMap<String, Object>();
 
         if(hasPicture(path[0]))
             map.add("file1", new FileSystemResource(path[TOP]));
@@ -77,8 +76,6 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
             map.add("file4", new FileSystemResource(path[SIDE_3]));
         else
             map.add("file4", new FileSystemResource(path[TOP]));
-
-        //map.add("id", 5);
 
         HttpHeaders imageHeaders = new HttpHeaders();
         imageHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
