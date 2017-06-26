@@ -19,6 +19,7 @@ import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.interf.RedirectListener;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.model.SendMeal;
 import com.sbbi.obesityappv2.model.User;
@@ -47,7 +48,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
     private List<String> listpredictedFood2;
     private List<String> listpredictedFood3;
     private List<List<String>> listAllpredictedFood;
-    private ResponseFood responseFood;
+    private Prediction responseFood;
     private int typeMeal;
 
     @Override
@@ -57,44 +58,17 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
         setContentView(R.layout.activity_result);//new layout with CardView
 
         Bundle extras = getIntent().getExtras();
-        responseFood = (ResponseFood) extras.get("result");
-        responseFood = (ResponseFood) extras.get("result");
+        responseFood = (Prediction) extras.get("result");
+
         typeMeal = (int) extras.getInt("typeMeal");
 
         recyclerView = (RecyclerView) findViewById(R.id.foodPrediction);
 
-        //mLayoutManager = new LinearLayoutManager(this);
-        //recyclerView.setLayoutManager(mLayoutManager);
-
-        Food food1 = new Food();
-        food1.setName(responseFood.getFood1()[0]);
-
-        Food food2 = new Food();
-        food2.setName(responseFood.getFood2()[0]);
-
-
-        Food food3 = new Food();
-        food3.setName(responseFood.getFood3()[0]);
-
         listFood = new ArrayList<Food>();
-        listFood.add(food1);
-        listFood.add(food2);
-        listFood.add(food3);
-
-        listWeight = new ArrayList<Number>();
-        listWeight.add(responseFood.getWeightFood1());
-        listWeight.add(responseFood.getWeightFood2());
-        listWeight.add(responseFood.getWeightFood3());
 
         listpredictedFood1 = new ArrayList<String>();
         listpredictedFood2 = new ArrayList<String>();
         listpredictedFood3 = new ArrayList<String>();
-
-        for(int i = 0; i < TOTAL_FOOD; i++){
-            listpredictedFood1.add(responseFood.getFood1()[i]);
-            listpredictedFood2.add(responseFood.getFood2()[i]);
-            listpredictedFood3.add(responseFood.getFood3()[i]);
-        }
 
         listAllpredictedFood = new ArrayList<List<String>>();
         listAllpredictedFood.add(listpredictedFood1);
@@ -107,32 +81,6 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        /*Food f1 = new Food();
-        f1.setName("Breakfast");
-
-        Food f2 = new Food();
-        f2.setName("pow");
-
-        listFood = new ArrayList<Food>();
-        listFood.add(f1);
-        listFood.add(f2);
-
-        setLayoutAfterRequest(listFood);*/
-
-        //ClassificationReturn classification = (ClassificationReturn) extras.get("result");
-
-        /*
-        String food1[] = extras.getStringArray("food1");
-        String food2[] = extras.getStringArray("food2");
-        String food3[] = extras.getStringArray("food3");
-        */
-        //TextView textView = (TextView) findViewById(R.id.result);
-        //textView.setText(str);
-
-        /*String food1[] = {"Peach","Raspberry","Apple","Carrot","Test","Test","Test","Test","Test","Test","Test","Test","Test"};
-        String food2[] = {"Pear","Banana","Orange","Chips","Test","Test","Test","Test","Test","Test","Test","Test","Test"};
-        String food3[] = {"Rice","Sandwich bread","Grilled breast chicken","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test"};*/
 
     }
 
@@ -151,13 +99,13 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
 
                 //new SaveMeal().execute(listFood);
 
-                SendMeal sendMeal = makeSendMeal(responseFood);
+                /*SendMeal sendMeal = makeSendMeal(responseFood);
 
                 int userId = getUserId();
                 sendMeal.setUserId(userId);
 
                 new SaveMeal(this).execute(sendMeal);
-
+                */
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

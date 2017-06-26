@@ -8,8 +8,13 @@ import android.view.View;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
+import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.request.UploadImages;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by bsilva on 10/20/16.
@@ -60,6 +65,8 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
 
         //API CALL
         new UploadImages(this, userId).execute(paths);
+
+
 
         //Intent intent = new Intent(this, ResultActivity.class);
         //startActivity(intent);
@@ -113,12 +120,12 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
     }
 
     @Override
-    public void sendToResultScreen(ResponseFood responseFood) {
+    public void sendToResultScreen(Prediction prediction) {
         Intent intent = new Intent(this, ResultActivity.class);
         Bundle extras = new Bundle();
         //extras.putSerializable("result",classificationReturn);
         //extras.putString("result", classificationReturn.getFood1Str());
-        extras.putSerializable("result", responseFood);
+        extras.putSerializable("result", prediction);
         extras.putInt("typeMeal", typeMeal);
         //extras.putStringArray("food1", responseFoodName.getFood1());
         //extras.putStringArray("food2", responseFoodName.getFood2());

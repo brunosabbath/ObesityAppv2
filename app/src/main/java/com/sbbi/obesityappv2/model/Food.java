@@ -1,5 +1,7 @@
 package com.sbbi.obesityappv2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -34,11 +36,13 @@ public class Food implements Serializable{
 
     private double sugar;
 
+    @JsonIgnore
     private List<Meal> meals;
 
     public Food() {
     }
 
+    @JsonIgnore
     public List<Meal> getMeals() {
         return this.meals;
     }

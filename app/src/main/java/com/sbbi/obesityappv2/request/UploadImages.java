@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.helper.Paths;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
+import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.ResponseFood;
 
 import org.springframework.core.io.FileSystemResource;
@@ -25,7 +26,7 @@ import java.nio.charset.Charset;
 /**
  * Created by bsilva on 10/24/16.
  */
-public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
+public class UploadImages extends AsyncTask<String[], Void, Prediction>{
 
     private ClassificationInterf listener;
     private final int TOP = 0;
@@ -40,7 +41,7 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
     }
 
     @Override
-    protected ResponseFood doInBackground(String[]... strings) {
+    protected Prediction doInBackground(String[]... strings) {
 
         String url = Paths.myPc + "/pictures/" + userId;
 
@@ -82,7 +83,7 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
 
         HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
 
-        ResponseEntity<ResponseFood> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, ResponseFood.class);
+        ResponseEntity<Prediction> response = restTemplate.exchange(url, HttpMethod.POST, imageEntity, Prediction.class);
 
         return response.getBody();
     }
@@ -96,7 +97,7 @@ public class UploadImages extends AsyncTask<String[], Void, ResponseFood>{
     }
 
     @Override
-    protected void onPostExecute(ResponseFood responseFoodName) {
-        listener.sendToResultScreen(responseFoodName);
+    protected void onPostExecute(Prediction prediction) {
+        listener.sendToResultScreen(prediction);
     }
 }
