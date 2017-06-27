@@ -26,6 +26,15 @@ public class Prediction implements Serializable{
         this.predictionsFoodBottom = predictionsFoodBottom;
     }
 
+    public List<String> getPrediction(int position){
+        if(position == 0)
+            return predictionsFoodLeft;
+        else if(position == 1)
+            return predictionsFoodRight;
+        else
+            return predictionsFoodBottom;
+    }
+
     public String getPath() {
         return path;
     }

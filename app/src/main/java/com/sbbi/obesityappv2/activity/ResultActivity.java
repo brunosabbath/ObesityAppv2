@@ -48,40 +48,37 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
     private List<String> listpredictedFood2;
     private List<String> listpredictedFood3;
     private List<List<String>> listAllpredictedFood;
-    private Prediction responseFood;
+    private Prediction predictions;
     private int typeMeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_result);
         setContentView(R.layout.activity_result);//new layout with CardView
 
         Bundle extras = getIntent().getExtras();
-        responseFood = (Prediction) extras.get("result");
 
+        //get predictions from previous activity
+        predictions = (Prediction) extras.get("result");
+
+        //get meal type
         typeMeal = (int) extras.getInt("typeMeal");
 
         recyclerView = (RecyclerView) findViewById(R.id.foodPrediction);
 
-        listFood = new ArrayList<Food>();
+        //send data to adapter
+        //foodAdapter = new FoodPredictionRecyclerAdapter(listFood, listWeight, listAllpredictedFood, this);
+        foodAdapter = new FoodPredictionRecyclerAdapter(predictions, this);
 
-        listpredictedFood1 = new ArrayList<String>();
-        listpredictedFood2 = new ArrayList<String>();
-        listpredictedFood3 = new ArrayList<String>();
+        List<List<String>> list = new ArrayList<>();
+        list.add(predictions.getPredictionsFoodLeft());
+        list.add(predictions.getPredictionsFoodRight());
+        list.add(predictions.getPredictionsFoodBottom());
 
-        listAllpredictedFood = new ArrayList<List<String>>();
-        listAllpredictedFood.add(listpredictedFood1);
-        listAllpredictedFood.add(listpredictedFood2);
-        listAllpredictedFood.add(listpredictedFood3);
-
-        foodAdapter = new FoodPredictionRecyclerAdapter(listFood, listWeight, listAllpredictedFood, this);
-        //foodAdapter = new FoodPredictionRecyclerAdapter(new ArrayList<Food>(), this);
-        //foodAdapter = new FoodPredictionRecyclerAdapter(responseFood, this);
+        foodAdapter = new FoodPredictionRecyclerAdapter(list, this);
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     @Override
@@ -106,11 +103,11 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
 
                 new SaveMeal(this).execute(sendMeal);
                 */
+                Toast.makeText(getApplicationContext(), "Buttom save pressed", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     private SendMeal makeSendMeal(ResponseFood responseFood) {
@@ -152,25 +149,14 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
 
     @Override
     public void setLayoutAfterRequest(List<Food> listFood) {
-    //public void setLayoutAfterRequest(ResponseFood responseFood) {
 
-        /*this.listFood = new ArrayList<Food>();
-        this.listFood.add(responseFood.getNutrientsFood1());
-        this.listFood.add(responseFood.getNutrientsFood2());
-        this.listFood.add(responseFood.getNutrientsFood3());*/
-
-        this.listFood = listFood;
-        foodAdapter = new FoodPredictionRecyclerAdapter(listFood, this);
-        //foodAdapter = new FoodPredictionRecyclerAdapter(responseFood, this);
-        recyclerView.setAdapter(foodAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        super.onActivityResult(requestCode, resultCode, data);
+        /*super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CODE) {
             if (resultCode == RESULT_OK) {
@@ -187,7 +173,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
 
                 Log.i("FOOD", bundle.getName() + " " + bundle.getPosition());
             }
-        }
+        }*/
     }
 
     public int getUserId() {
@@ -209,19 +195,17 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
     @Override
     public void redirectToActivity(boolean done) {
 
-        Message msg = handler.obtainMessage();
+        /*Message msg = handler.obtainMessage();
 
         if(done){
             msg.arg1 = 1;
             handler.sendMessage(msg);
-
         }
         else{
             msg.arg1 = 2;
             handler.sendMessage(msg);
         }
 
-        startActivity(new Intent(this, MainActivity.class));
-
+        startActivity(new Intent(this, MainActivity.class));*/
     }
 }

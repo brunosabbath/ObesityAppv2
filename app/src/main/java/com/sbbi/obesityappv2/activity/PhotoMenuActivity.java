@@ -65,11 +65,6 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
 
         //API CALL
         new UploadImages(this, userId).execute(paths);
-
-
-
-        //Intent intent = new Intent(this, ResultActivity.class);
-        //startActivity(intent);
     }
 
     public void photoTopClick(View view){
@@ -123,13 +118,10 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
     public void sendToResultScreen(Prediction prediction) {
         Intent intent = new Intent(this, ResultActivity.class);
         Bundle extras = new Bundle();
-        //extras.putSerializable("result",classificationReturn);
-        //extras.putString("result", classificationReturn.getFood1Str());
+
         extras.putSerializable("result", prediction);
         extras.putInt("typeMeal", typeMeal);
-        //extras.putStringArray("food1", responseFoodName.getFood1());
-        //extras.putStringArray("food2", responseFoodName.getFood2());
-        //extras.putStringArray("food3", responseFoodName.getFood3());
+
         intent.putExtras(extras);
 
         cancelProgressDialog();
