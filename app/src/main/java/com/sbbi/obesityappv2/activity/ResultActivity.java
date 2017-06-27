@@ -1,21 +1,20 @@
 package com.sbbi.obesityappv2.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.GetUserIdHelper;
+import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.interf.RedirectListener;
 import com.sbbi.obesityappv2.model.Food;
@@ -23,9 +22,8 @@ import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.model.SendMeal;
 import com.sbbi.obesityappv2.model.User;
-import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
 import com.sbbi.obesityappv2.recycleradapter.FoodPredictionRecyclerAdapter;
-import com.sbbi.obesityappv2.request.SaveMeal;
+import com.sbbi.obesityappv2.request.HttpSaveMeal;
 import com.sbbi.obesityappv2.sqlite.ObesityDbDao;
 
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ import java.util.List;
  *
  *
  */
-public class ResultActivity extends AppCompatActivity implements FoodInterf, RedirectListener {
+public class ResultActivity extends AppCompatActivity implements ClassificationInterf {
 
     private RecyclerView recyclerView;
     private FoodPredictionRecyclerAdapter foodAdapter;
@@ -62,20 +60,18 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
         predictions = (Prediction) extras.get("result");
 
         //get meal type
-        typeMeal = (int) extras.getInt("typeMeal");
+        this.typeMeal = (int) extras.getInt("typeMeal");
+        predictions.setTypeMeal(this.typeMeal);
 
         recyclerView = (RecyclerView) findViewById(R.id.foodPrediction);
 
         //send data to adapter
-        //foodAdapter = new FoodPredictionRecyclerAdapter(listFood, listWeight, listAllpredictedFood, this);
-        foodAdapter = new FoodPredictionRecyclerAdapter(predictions, this);
-
         List<List<String>> list = new ArrayList<>();
         list.add(predictions.getPredictionsFoodLeft());
         list.add(predictions.getPredictionsFoodRight());
         list.add(predictions.getPredictionsFoodBottom());
 
-        foodAdapter = new FoodPredictionRecyclerAdapter(list, this);
+        foodAdapter = new FoodPredictionRecyclerAdapter(list);
         recyclerView.setAdapter(foodAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -93,21 +89,24 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
 
         switch (item.getItemId()) {
             case R.id.save_meal:
-
-                //new SaveMeal().execute(listFood);
-
-                /*SendMeal sendMeal = makeSendMeal(responseFood);
-
-                int userId = getUserId();
-                sendMeal.setUserId(userId);
-
-                new SaveMeal(this).execute(sendMeal);
-                */
-                Toast.makeText(getApplicationContext(), "Buttom save pressed", Toast.LENGTH_SHORT).show();
-                return true;
+                String predictionsString[] = foodAdapter.getTextPredictions();
+                saveMeal(predictionsString);
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void saveMeal(String predictionsString[]){
+        Toast.makeText(getApplicationContext(), "Button save pressed", Toast.LENGTH_SHORT).show();
+        //make predictions correct
+        predictions.updatePredictionLeft(predictionsString[0]);
+        predictions.updatePredictionRight(predictionsString[1]);
+        predictions.updatePredictionBottom(predictionsString[2]);
+
+        int userId = GetUserIdHelper.getUserId(getApplicationContext());
+
+        new HttpSaveMeal(this, userId, predictions).execute();
+
     }
 
     private SendMeal makeSendMeal(ResponseFood responseFood) {
@@ -145,12 +144,6 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
 
     public void startCorretPredictionActivity(Intent intent) {
         startActivityForResult(intent, CODE);
-    }
-
-    @Override
-    public void setLayoutAfterRequest(List<Food> listFood) {
-
-
     }
 
     @Override
@@ -193,19 +186,7 @@ public class ResultActivity extends AppCompatActivity implements FoodInterf, Red
     };
 
     @Override
-    public void redirectToActivity(boolean done) {
+    public void sendToResultScreen(Prediction prediction) {
 
-        /*Message msg = handler.obtainMessage();
-
-        if(done){
-            msg.arg1 = 1;
-            handler.sendMessage(msg);
-        }
-        else{
-            msg.arg1 = 2;
-            handler.sendMessage(msg);
-        }
-
-        startActivity(new Intent(this, MainActivity.class));*/
     }
 }

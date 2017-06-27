@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,18 +24,23 @@ public class FoodPredictedViewHolder extends RecyclerView.ViewHolder {
     private TextView removeButton;
     private TextView positionFood;
     private View itemView;
-    private FoodInterf listener;
+    private Button buttonPrediction2;
+    private Button buttonPrediction3;
+    private Button buttonPrediction4;
+    private Button buttonPrediction5;
 
-    public FoodPredictedViewHolder(final View itemView, final FoodInterf listener) {
+
+    public FoodPredictedViewHolder(final View itemView) {
         super(itemView);
-        this.listener = listener;
         this.itemView = itemView;
 
         name = (TextView) itemView.findViewById(R.id.food_name);
         removeButton = (TextView) itemView.findViewById(R.id.remove_food);
-        otherPredictedFood = (TextView) itemView.findViewById(R.id.other_predicted);
         positionFood = (TextView) itemView.findViewById(R.id.position_food);
-
+        buttonPrediction2 = (Button) itemView.findViewById(R.id.btn_predicted_2);
+        buttonPrediction3 = (Button) itemView.findViewById(R.id.btn_predicted_3);
+        buttonPrediction4 = (Button) itemView.findViewById(R.id.btn_predicted_4);
+        buttonPrediction5 = (Button) itemView.findViewById(R.id.btn_predicted_5);
     }
 
     public Context getContext(){
@@ -43,6 +49,17 @@ public class FoodPredictedViewHolder extends RecyclerView.ViewHolder {
 
     public TextView getPositionFood(){
         return positionFood;
+    }
+
+    public Button getButtonPrediction(int id){
+        if(id == 2)
+            return buttonPrediction2;
+        else if(id == 3)
+            return buttonPrediction3;
+        else if(id == 4)
+            return buttonPrediction4;
+        else
+            return buttonPrediction5;
     }
 
     public TextView getOtherPredictions(){

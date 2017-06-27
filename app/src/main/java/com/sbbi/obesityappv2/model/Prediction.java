@@ -1,6 +1,7 @@
 package com.sbbi.obesityappv2.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class Prediction implements Serializable{
     private Food predictedFoodBottom;
     private String path;
     private Pixels pixels;
+    private int typeMeal;
 
     public Prediction(){}
 
@@ -33,6 +35,14 @@ public class Prediction implements Serializable{
             return predictionsFoodRight;
         else
             return predictionsFoodBottom;
+    }
+
+    public void setTypeMeal(int typeMeal){
+        this.typeMeal = typeMeal;
+    }
+
+    public int getTypeMeal(){
+        return typeMeal;
     }
 
     public String getPath() {
@@ -99,4 +109,18 @@ public class Prediction implements Serializable{
         return this.pixels;
     }
 
+    public void updatePredictionLeft(String s) {
+        predictionsFoodLeft = new ArrayList<>();
+        predictionsFoodLeft.add(s);
+    }
+
+    public void updatePredictionRight(String s) {
+        predictionsFoodRight = new ArrayList<>();
+        predictionsFoodRight.add(s);
+    }
+
+    public void updatePredictionBottom(String s) {
+        predictionsFoodBottom = new ArrayList<>();
+        predictionsFoodBottom.add(s);
+    }
 }

@@ -4,7 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.sbbi.obesityappv2.helper.Paths;
+import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.interf.RedirectListener;
+import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.SendMeal;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -17,41 +19,44 @@ import org.springframework.web.client.RestTemplate;
  * Created by bsilva on 12/22/16.
  */
 
-public class SaveMeal extends AsyncTask<SendMeal, Void, Boolean> {
+public class HttpSaveMeal extends AsyncTask<Void, Void, Prediction> {
 
-    private RedirectListener listener;
+    private ClassificationInterf listener;
+    private int userId;
+    private Prediction predictions;
 
-    public SaveMeal(RedirectListener listener){
+    public HttpSaveMeal(ClassificationInterf listener, int userId, Prediction predictions){
         this.listener = listener;
+        this.userId = userId;
+        this.predictions = predictions;
     }
 
     @Override
-    protected Boolean doInBackground(SendMeal... params) {
+    protected Prediction doInBackground(Void... params) {
 
-        String url = Paths.myPc + "/meal";
+        String url = Paths.myPc + "/meal/" + userId;
 
-        SendMeal mealToBeSent = params[0];
 
         RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
-
         try {
-            boolean result = restTemplate.postForObject(url, mealToBeSent, Boolean.class);
-            return result;
+            predictions = restTemplate.postForObject(url, predictions, Prediction.class);
+            return predictions;
+
         } catch (HttpClientErrorException e) {
             Log.e("ERROR", e.getLocalizedMessage(), e); //user not found
         } catch (ResourceAccessException e) {
             Log.e("ERROR", e.getLocalizedMessage(), e);
         }
 
-        return false;
+        return predictions;
     }
 
     @Override
-    protected void onPostExecute(Boolean done) {
-        listener.redirectToActivity(done);
+    protected void onPostExecute(Prediction prediction) {
+        listener.sendToResultScreen(prediction);
     }
 }
