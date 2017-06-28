@@ -17,7 +17,9 @@ import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.interf.FoodInterf;
 import com.sbbi.obesityappv2.interf.RedirectListener;
+import com.sbbi.obesityappv2.interf.SavedMealListener;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.FoodsWeightEstimation;
 import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.ResponseFood;
 import com.sbbi.obesityappv2.model.SendMeal;
@@ -34,7 +36,7 @@ import java.util.List;
  *
  *
  */
-public class ResultActivity extends AppCompatActivity implements ClassificationInterf {
+public class ResultActivity extends AppCompatActivity implements SavedMealListener {
 
     private RecyclerView recyclerView;
     private FoodPredictionRecyclerAdapter foodAdapter;
@@ -186,7 +188,7 @@ public class ResultActivity extends AppCompatActivity implements ClassificationI
     };
 
     @Override
-    public void sendToResultScreen(Prediction prediction) {
+    public void sendToResultScreen(FoodsWeightEstimation foodsWeightEstimation) {
 
     }
 }

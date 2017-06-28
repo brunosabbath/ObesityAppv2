@@ -11,44 +11,103 @@ import java.util.List;
 public class Food implements Serializable{
 
     private int id;
-
     private double carbohydrate;
-
     private double cholesterol;
-
     private double energy;
-
     private double fattyAcidsMonounsaturated;
-
     private double fattyAcidsPolyunsaturated;
-
     private double fattyAcidsSaturated;
-
     private double fattyAcidTrans;
-
     private double fiber;
-
     private double lipid;
-
-    private String name;
-
     private double protein;
-
     private double sugar;
-
-    @JsonIgnore
+    private String name;
     private List<Meal> meals;
+    private double grams;
+    private char grade;
+    private double calcium;
+    private double iron;
+    private double potassium;
+    private double sodium;
+
 
     public Food() {
     }
 
-    @JsonIgnore
-    public List<Meal> getMeals() {
-        return this.meals;
+    public double getCalcium() {
+        return calcium;
     }
 
-    public void setMeals(List<Meal> meals) {
-        this.meals = meals;
+    public Food setCalcium(double calcium) {
+        this.calcium = calcium;
+        return this;
+    }
+
+    public double getIron() {
+        return iron;
+    }
+
+    public Food setIron(double iron) {
+        this.iron = iron;
+        return this;
+    }
+
+    public double getPotassium() {
+        return potassium;
+    }
+
+    public Food setPotassium(double potassium) {
+        this.potassium = potassium;
+        return this;
+    }
+
+    public double getSodium() {
+        return sodium;
+    }
+
+    public Food setSodium(double sodium) {
+        this.sodium = sodium;
+        return this;
+    }
+
+    public char getGrade() {
+        return grade;
+    }
+
+    public void setGrade(char grade) {
+        this.grade = grade;
+    }
+
+    public double getGrams() {
+        return grams;
+    }
+
+    public Food setGrams(double grams) {
+        this.grams = grams;
+        return this;
+    }
+
+    public Food(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Food(Food food) {
+        this.carbohydrate = food.getCarbohydrate();
+        this.cholesterol = food.getCholesterol();
+        this.energy = food.getEnergy();
+        this.fattyAcidsMonounsaturated = food.getFattyAcidsMonounsaturated();
+        this.fattyAcidsPolyunsaturated = food.getFattyAcidsPolyunsaturated();
+        this.fattyAcidsSaturated = food.getFattyAcidsSaturated();
+        this.fattyAcidTrans = food.getFattyAcidTrans();
+        this.fiber = food.getFiber();
+        this.lipid = food.getLipid();
+        this.protein = food.getProtein();
+        this.sugar = food.getSugar();
+        this.name = food.getName();
+        this.grams = food.getGrams();
+
     }
 
     public int getId() {
@@ -168,19 +227,28 @@ public class Food implements Serializable{
         return this;
     }
 
-    public void changeAmountGrams(double grams){
-        grams = grams / 100;
-        this.energy *= grams;
-        this.protein *= grams;
-        this.lipid *= grams;
-        this.carbohydrate *= grams;
-        this.fiber *= grams;
-        this.sugar *= grams;
-        this.fattyAcidsSaturated *= grams;
-        this.fattyAcidsMonounsaturated *= grams;
-        this.fattyAcidsPolyunsaturated *= grams;
-        this.fattyAcidTrans *= grams;
-        this.cholesterol *= grams;
+    public List<Meal> getMeals() {
+        return this.meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
+    public Food changeAmountGrams(double grams){
+        this.grams = grams;
+        this.energy *= grams/100;
+        this.protein *= grams/100;
+        this.lipid *= grams/100;
+        this.carbohydrate *= grams/100;
+        this.fiber *= grams/100;
+        this.sugar *= grams/100;
+        this.fattyAcidsSaturated *= grams/100;
+        this.fattyAcidsMonounsaturated *= grams/100;
+        this.fattyAcidsPolyunsaturated *= grams/100;
+        this.fattyAcidTrans *= grams/100;
+        this.cholesterol *= grams/100;
+        return this;
     }
 
     @Override

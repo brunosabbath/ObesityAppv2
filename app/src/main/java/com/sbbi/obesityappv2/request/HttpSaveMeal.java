@@ -6,6 +6,8 @@ import android.util.Log;
 import com.sbbi.obesityappv2.helper.Paths;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.interf.RedirectListener;
+import com.sbbi.obesityappv2.interf.SavedMealListener;
+import com.sbbi.obesityappv2.model.FoodsWeightEstimation;
 import com.sbbi.obesityappv2.model.Prediction;
 import com.sbbi.obesityappv2.model.SendMeal;
 
@@ -19,20 +21,20 @@ import org.springframework.web.client.RestTemplate;
  * Created by bsilva on 12/22/16.
  */
 
-public class HttpSaveMeal extends AsyncTask<Void, Void, Prediction> {
+public class HttpSaveMeal extends AsyncTask<Void, Void, FoodsWeightEstimation> {
 
-    private ClassificationInterf listener;
+    private SavedMealListener listener;
     private int userId;
     private Prediction predictions;
 
-    public HttpSaveMeal(ClassificationInterf listener, int userId, Prediction predictions){
+    public HttpSaveMeal(SavedMealListener listener, int userId, Prediction predictions){
         this.listener = listener;
         this.userId = userId;
         this.predictions = predictions;
     }
 
     @Override
-    protected Prediction doInBackground(Void... params) {
+    protected FoodsWeightEstimation doInBackground(Void... params) {
 
         String url = Paths.myPc + "/meal/" + userId;
 
@@ -42,9 +44,11 @@ public class HttpSaveMeal extends AsyncTask<Void, Void, Prediction> {
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
+        FoodsWeightEstimation foodsWeightEstimation = null;
+
         try {
-            predictions = restTemplate.postForObject(url, predictions, Prediction.class);
-            return predictions;
+            foodsWeightEstimation = restTemplate.postForObject(url, predictions, FoodsWeightEstimation.class);
+            return foodsWeightEstimation;
 
         } catch (HttpClientErrorException e) {
             Log.e("ERROR", e.getLocalizedMessage(), e); //user not found
@@ -52,11 +56,11 @@ public class HttpSaveMeal extends AsyncTask<Void, Void, Prediction> {
             Log.e("ERROR", e.getLocalizedMessage(), e);
         }
 
-        return predictions;
+        return foodsWeightEstimation;
     }
 
     @Override
-    protected void onPostExecute(Prediction prediction) {
-        listener.sendToResultScreen(prediction);
+    protected void onPostExecute(FoodsWeightEstimation foodsWeightEstimation) {
+        listener.sendToResultScreen(foodsWeightEstimation);
     }
 }
