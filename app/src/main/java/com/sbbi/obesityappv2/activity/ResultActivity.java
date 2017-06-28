@@ -111,64 +111,8 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
 
     }
 
-    private SendMeal makeSendMeal(ResponseFood responseFood) {
-
-        SendMeal meal = new SendMeal();
-
-        meal.setTypeMeal(typeMeal);
-
-        meal.setFood1(responseFood.getFood1()[0]);
-        meal.setFood2(responseFood.getFood2()[0]);
-        meal.setFood3(responseFood.getFood3()[0]);
-        meal.setWeightFood1(responseFood.getWeightFood1());
-        meal.setWeightFood2(responseFood.getWeightFood2());
-        meal.setWeightFood3(responseFood.getWeightFood3());
-        meal.setNutrients1(responseFood.getNutrientsFood1());
-        meal.setNutrients2(responseFood.getNutrientsFood2());
-        meal.setNutrients3(responseFood.getNutrientsFood3());
-
-        if (responseFood.getFood1() == null) {
-            meal.setNutrients1(null);
-            meal.setWeightFood1(0);
-            meal.setFood1(null);
-        } else if (responseFood.getFood2() == null) {
-            meal.setNutrients2(null);
-            meal.setWeightFood2(0);
-            meal.setFood2(null);
-        } else if (responseFood.getFood2() == null) {
-            meal.setNutrients3(null);
-            meal.setWeightFood3(0);
-            meal.setFood3(null);
-        }
-
-        return meal;
-    }
-
     public void startCorretPredictionActivity(Intent intent) {
         startActivityForResult(intent, CODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        /*super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CODE) {
-            if (resultCode == RESULT_OK) {
-
-                BundleCorrectFood bundle = (BundleCorrectFood) data.getExtras().getSerializable("myBundle");
-
-                Food food = listFood.get(bundle.getPosition());
-                food.setName(bundle.getName());
-
-                listFood.get(bundle.getPosition()).setName(bundle.getName());
-
-                //setLayoutAfterRequest(responseFood);
-                setLayoutAfterRequest(listFood);
-
-                Log.i("FOOD", bundle.getName() + " " + bundle.getPosition());
-            }
-        }*/
     }
 
     public int getUserId() {
@@ -189,6 +133,12 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
 
     @Override
     public void sendToResultScreen(FoodsWeightEstimation foodsWeightEstimation) {
+
+        Intent intent = new Intent(this, ResultNutrientActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("result", foodsWeightEstimation);
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 }

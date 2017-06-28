@@ -88,7 +88,8 @@
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.MealDetailsActivity" />
         <activity android:name=".activity.InsightActivity" />
-        <activity android:name=".activity.FingerActivity"></activity>
+        <activity android:name=".activity.FingerActivity" />
+        <activity android:name=".activity.ResultNutrientActivity"></activity>
     </application>
 
 </manifest>
