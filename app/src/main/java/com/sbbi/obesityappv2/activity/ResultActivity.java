@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.interf.FoodInterf;
@@ -107,7 +108,12 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
 
         int userId = GetUserIdHelper.getUserId(getApplicationContext());
 
-        new HttpSaveMeal(this, userId, predictions).execute();
+        if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            new HttpSaveMeal(this, userId, predictions).execute();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
+        }
 
     }
 

@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
+
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.interf.ClassificationInterf;
 import com.sbbi.obesityappv2.model.Prediction;
@@ -59,12 +62,18 @@ public class PhotoMenuActivity extends AppCompatActivity implements Classificati
 
     public void analyzeOnClick(View view){
 
-        showProgressDialog();
+        if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            showProgressDialog();
 
-        int userId = GetUserIdHelper.getUserId(getApplicationContext());
+            int userId = GetUserIdHelper.getUserId(getApplicationContext());
 
-        //API CALL
-        new UploadImages(this, userId).execute(paths);
+            //API CALL
+            new UploadImages(this, userId).execute(paths);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void photoTopClick(View view){

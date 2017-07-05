@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.error.EditTextError;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.PasswordHelper;
 import com.sbbi.obesityappv2.helper.VerifyHelper;
 import com.sbbi.obesityappv2.interf.UserListener;
@@ -72,7 +73,12 @@ public class LoginActivity extends AppCompatActivity implements UserListener, Ed
     }
 
     private void callApi(User user) {
-        new LoginHttp(this).execute(user);
+        if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            new LoginHttp(this).execute(user);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void goToSignup() {

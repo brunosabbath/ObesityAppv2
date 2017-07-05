@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.interf.ReturnInsightListener;
 import com.sbbi.obesityappv2.request.InsightHttp;
 
@@ -32,7 +34,12 @@ public class InsightActivity extends AppCompatActivity implements ReturnInsightL
 
     private void callApi(int userId, int caloriesBurned) {
 
-        new InsightHttp(this).execute(userId, caloriesBurned);
+        if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            new InsightHttp(this).execute(userId, caloriesBurned);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
+        }
 
     }
 

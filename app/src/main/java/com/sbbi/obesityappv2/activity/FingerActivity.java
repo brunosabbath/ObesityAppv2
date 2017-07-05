@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 import com.sbbi.obesityappv2.interf.FingerListener;
 import com.sbbi.obesityappv2.request.HttpSaveFinger;
@@ -45,7 +46,13 @@ public class FingerActivity extends AppCompatActivity implements FingerListener 
     }
 
     private void callApi(double length, double width, double userId) {
-        new HttpSaveFinger(this).execute(length, width, (double)userId);
+
+        if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            new HttpSaveFinger(this).execute(length, width, (double)userId);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No internet connectivity", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

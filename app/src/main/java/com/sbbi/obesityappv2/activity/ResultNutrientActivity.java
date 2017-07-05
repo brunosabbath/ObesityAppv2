@@ -91,6 +91,13 @@ public class ResultNutrientActivity extends AppCompatActivity{
         breakdownList.add("Total proteins: " + totalProteins + " g");
         breakdownList.add("Total sugars: " + totalSugars + " g");
 
+        //higher in calories
+        //higher in protein
+        //higher in sugar
+        //higher in carbs
+
+        //percentage of each nutrient
+
         listHash.put(listDataHeader.get(0), food1List);
         listHash.put(listDataHeader.get(1), food2List);
         listHash.put(listDataHeader.get(2), food3List);
