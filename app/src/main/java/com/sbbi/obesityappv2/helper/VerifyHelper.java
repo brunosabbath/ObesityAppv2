@@ -18,4 +18,11 @@ public class VerifyHelper {
         return answer;
     }
 
+    public static boolean isValidText(String text) {
+
+        if(text == null || text.trim().equals(""))
+            return false;
+
+        return true;
+    }
 }

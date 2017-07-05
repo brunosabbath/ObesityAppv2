@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.error.EditTextError;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.PasswordHelper;
 import com.sbbi.obesityappv2.helper.VerifyHelper;
 import com.sbbi.obesityappv2.interf.UserListener;
@@ -46,9 +47,8 @@ public class SignUpActivity extends AppCompatActivity implements UserListener, E
                     String passwordStr = password.getText().toString().trim();
 
                     User user = new User();
-                    user.setName(name.getText().toString())
-                            .setEmail(email.getText().toString())
-                            .setPassword(PasswordHelper.securePassword(passwordStr));
+                    user.setName(name.getText().toString()).setEmail(email.getText().toString()).setPassword(PasswordHelper.securePassword(passwordStr));
+
                     callApi(user);
                 }
                 else{
@@ -66,7 +66,13 @@ public class SignUpActivity extends AppCompatActivity implements UserListener, E
     }
 
     private void callApi(User user) {
-        new SignUpHttp(this).execute(user);
+        if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            new SignUpHttp(this).execute(user);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void returnLogin() {

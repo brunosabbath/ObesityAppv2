@@ -16,6 +16,7 @@ import com.fitbit.api.services.CaloriesService;
 import com.fitbit.api.services.UserService;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.activity.InsightActivity;
+import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
 
 import java.util.ArrayList;
@@ -45,11 +46,22 @@ public class InsightsFragment extends Fragment implements UserService.UserHandle
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
+        if(v.getId() == R.id.insight_button){
+
+            if(ConnectionHelper.isInternetAvailable(getContext())){
+                buttonClick();
+            }
+            else{
+                Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+        /*switch(v.getId()){
             case R.id.insight_button:
                 buttonClick();
                 break;
-        }
+        }*/
     }
 
     private void buttonClick() {

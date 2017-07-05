@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity implements UserListener, Ed
                     showMandatoryFieldsMessage("All fields are required");
                 }
 
-
             }
         });
 

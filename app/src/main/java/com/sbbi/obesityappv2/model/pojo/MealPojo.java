@@ -15,6 +15,7 @@ public class MealPojo implements Serializable{
     private String type;
     private boolean eatingOutside;
     private List<FoodPojo> listFood;
+    private String date;
 
     public MealPojo(){
         listFood = new ArrayList<FoodPojo>();
@@ -42,6 +43,14 @@ public class MealPojo implements Serializable{
 
     public void addFood(FoodPojo food) {
         this.listFood.add(food);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate(){
+        return date;
     }
 
 }

@@ -16,6 +16,7 @@ import com.sbbi.obesityappv2.interf.TestFoodInterf;
 public class MealViewHolder extends RecyclerView.ViewHolder{
 
     private TextView mealType;
+    private TextView mealDate;
     private View itemView;
     private MealPojoListener listener;
 
@@ -25,13 +26,16 @@ public class MealViewHolder extends RecyclerView.ViewHolder{
         this.itemView = itemView;
 
         mealType = (TextView) itemView.findViewById(R.id.meal_type);
+        mealDate = (TextView) itemView.findViewById(R.id.meal_date);
 
     }
 
-
-
     public TextView getMealType(){
         return mealType;
+    }
+
+    public TextView getMealDate(){
+        return mealDate;
     }
 
     public Context getContext() {

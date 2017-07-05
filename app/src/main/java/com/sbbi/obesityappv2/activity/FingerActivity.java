@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.helper.ConnectionHelper;
 import com.sbbi.obesityappv2.helper.GetUserIdHelper;
+import com.sbbi.obesityappv2.helper.VerifyHelper;
 import com.sbbi.obesityappv2.interf.FingerListener;
 import com.sbbi.obesityappv2.request.HttpSaveFinger;
 
@@ -36,11 +37,20 @@ public class FingerActivity extends AppCompatActivity implements FingerListener 
                 lengthEditText = (EditText) findViewById(R.id.finger_length_text);
                 widthEditText = (EditText) findViewById(R.id.finger_width_text);
 
-                length = Double.parseDouble(lengthEditText.getText().toString());
-                width = Double.parseDouble(widthEditText.getText().toString());
-                int userId = GetUserIdHelper.getUserId(getApplicationContext());
+                String lengthStr = lengthEditText.getText().toString().trim();
+                String widthStr = widthEditText.getText().toString().trim();
 
-                callApi(length, width, (double)userId);
+                if(VerifyHelper.isValidText(lengthStr)|| VerifyHelper.isValidText(widthStr)){
+                    Toast.makeText(getApplicationContext(), "Fields cannot be empty", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    length = Double.parseDouble(lengthStr);
+                    width = Double.parseDouble(widthStr);
+                    int userId = GetUserIdHelper.getUserId(getApplicationContext());
+
+                    callApi(length, width, (double)userId);
+                }
+
             }
         });
     }

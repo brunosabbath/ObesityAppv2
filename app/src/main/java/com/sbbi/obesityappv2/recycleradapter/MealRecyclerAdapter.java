@@ -53,6 +53,8 @@ public class MealRecyclerAdapter extends RecyclerView.Adapter<MealViewHolder> {
 
         holder.getMealType().setText(mealPojo.getType());
 
+        holder.getMealDate().setText(mealPojo.getDate());
+
         holder.getMealType().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
