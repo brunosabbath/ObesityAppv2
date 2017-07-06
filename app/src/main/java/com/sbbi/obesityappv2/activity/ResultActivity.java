@@ -1,8 +1,10 @@
 package com.sbbi.obesityappv2.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.media.MediaBrowserServiceCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +52,7 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
     private List<String> listpredictedFood3;
     private List<List<String>> listAllpredictedFood;
     private Prediction predictions;
+    private ProgressDialog progressDialog;
     private int typeMeal;
 
     @Override
@@ -100,7 +103,7 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
     }
 
     private void saveMeal(String predictionsString[]){
-        Toast.makeText(getApplicationContext(), "Button save pressed", Toast.LENGTH_SHORT).show();
+
         //make predictions correct
         predictions.updatePredictionLeft(predictionsString[0]);
         predictions.updatePredictionRight(predictionsString[1]);
@@ -109,6 +112,7 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
         int userId = GetUserIdHelper.getUserId(getApplicationContext());
 
         if(ConnectionHelper.isInternetAvailable(getApplicationContext())){
+            showProgressDialog();
             new HttpSaveMeal(this, userId, predictions).execute();
         }
         else{
@@ -117,9 +121,17 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
 
     }
 
-    public void startCorretPredictionActivity(Intent intent) {
-        startActivityForResult(intent, CODE);
+    private void showProgressDialog() {
+        progressDialog = new ProgressDialog(ResultActivity.this);
+        progressDialog.setTitle("Saving meal");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
+
+    private void cancelProgressDialog() {
+        progressDialog.cancel();
+    }
+
 
     public int getUserId() {
         ObesityDbDao dao = new ObesityDbDao(this);
@@ -144,6 +156,7 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
         Bundle bundle = new Bundle();
         bundle.putSerializable("result", foodsWeightEstimation);
         intent.putExtras(bundle);
+        cancelProgressDialog();
         startActivity(intent);
 
     }

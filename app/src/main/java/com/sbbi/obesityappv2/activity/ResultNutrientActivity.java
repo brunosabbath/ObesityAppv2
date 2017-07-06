@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
@@ -14,6 +15,8 @@ import com.sbbi.obesityappv2.expandableListView.MyExpandableAdapter;
 import com.sbbi.obesityappv2.model.Food;
 import com.sbbi.obesityappv2.model.FoodsWeightEstimation;
 import com.sbbi.obesityappv2.model.Prediction;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +31,8 @@ public class ResultNutrientActivity extends AppCompatActivity{
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHash;
     private FoodsWeightEstimation foodsWeightEstimation;
+    private String info = "";
+    private TextView header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,14 @@ public class ResultNutrientActivity extends AppCompatActivity{
 
         Bundle extras = getIntent().getExtras();
         foodsWeightEstimation = (FoodsWeightEstimation) extras.get("result");
+
+        try {
+            info = extras.getString("info");
+            header = (TextView) findViewById(R.id.expandable_label);
+            header.setText(info);
+        } catch (NullPointerException e){
+
+        }
 
         if(foodsWeightEstimation.getFood1() != null && foodsWeightEstimation.getFood2() != null && foodsWeightEstimation.getFood3() != null){
             listView = (ExpandableListView) findViewById(R.id.expandable_list);

@@ -87,8 +87,12 @@ public class MealRecyclerAdapter extends RecyclerView.Adapter<MealViewHolder> {
 
                     Bundle bundle = new Bundle();
 
+                    String info = mealPojo.getType() + " - " + mealPojo.getDate();
+
                     Intent intent = new Intent(holder.getContext(), ResultNutrientActivity.class);
                     intent.putExtra("result", foodWeight);
+                    intent.putExtra("info", info);
+
                     holder.getContext().startActivity(intent);
 
                 }

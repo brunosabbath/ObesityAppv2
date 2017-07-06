@@ -53,29 +53,17 @@ public class PreferencesFragment extends Fragment implements ResourceLoadedHandl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_preferences, container, false);
 
-        Button btnGetActivity = (Button) layout.findViewById(R.id.btnGetActivity);
-        btnGetActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean loggedIn = AuthenticationManager.isLoggedIn();
-
-                Intent intent = new Intent(getActivity(), UserDataActivity.class);
-                startActivity(intent);
-
-                Log.i("LOGGED", loggedIn + "");
-            }
-        });
-
-        Button btnLogout = (Button) layout.findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-
-            }
-        });
+        boolean loggedIn = AuthenticationManager.isLoggedIn();//is logged in fitbit
 
         Button btnFitbit = (Button) layout.findViewById(R.id.btnFitbit);
+        Button btnGetActivity = (Button) layout.findViewById(R.id.btnGetActivity);
+        Button btnFinger = (Button) layout.findViewById(R.id.btnFinger);
+        Button btnLogout = (Button) layout.findViewById(R.id.btnLogout);
+
+        if(loggedIn){
+
+        }
+
         btnFitbit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,13 +74,29 @@ public class PreferencesFragment extends Fragment implements ResourceLoadedHandl
             }
         });
 
-        Button btnFinger = (Button) layout.findViewById(R.id.btnFinger);
+        btnGetActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), UserDataActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnFinger.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), FingerActivity.class);
                 startActivity(i);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+
             }
         });
 

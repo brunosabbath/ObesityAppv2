@@ -85,10 +85,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.SignUpActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sbbi.obesityappv2.activity.LoginActivity" />
+        </activity>
         <activity android:name=".activity.MealDetailsActivity" />
         <activity android:name=".activity.InsightActivity" />
-        <activity android:name=".activity.FingerActivity" />
+        <activity android:name=".activity.FingerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sbbi.obesityappv2.activity.MainActivity" />
+        </activity>
         <activity android:name=".activity.ResultNutrientActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

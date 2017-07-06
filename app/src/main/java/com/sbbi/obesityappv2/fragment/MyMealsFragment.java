@@ -114,31 +114,15 @@ public class MyMealsFragment extends Fragment implements MealPojoListener{
     @Override
     public void setLayoutAfterRequest(List<MealPojo> listMeal) {
         if(listMeal.size() == 0) {
-            //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
-            //errorMsg.setVisibility(View.VISIBLE);
+
             Toast.makeText(getActivity(), "No meals have been found", Toast.LENGTH_LONG).show();
         }
         else{
-            //errorMsg.setVisibility(View.INVISIBLE);
+
             mealAdapter = new MealRecyclerAdapter(getActivity(), listMeal, this);
             recyclerView.setAdapter(mealAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
     }
-
-    /*@Override
-    public void setLayoutAfterRequest(List<Food> food) {
-        if(food.size() == 0) {
-            //Toast.makeText(getActivity(),Path.NO_EVENTS_FOUND,Toast.LENGTH_LONG).show();
-            //errorMsg.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), "No meals have been found", Toast.LENGTH_LONG).show();
-        }
-        else{
-            //errorMsg.setVisibility(View.INVISIBLE);
-            foodAdapter = new FoodRecyclerAdapter(getActivity(), food, this);
-            recyclerView.setAdapter(foodAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }
-    }*/
 
 }
