@@ -33,6 +33,21 @@ public class Food implements Serializable{
 
 
     public Food() {
+        this.id = 0;
+        this.carbohydrate = 0;
+        this.cholesterol = 0;
+        this.energy = 0;
+        this. fiber = 0;
+        this.lipid = 0;
+        this.protein = 0;
+        this.sugar = 0;
+        this.name = "";
+        this.grams = 0;
+        this.grade = ' ';
+        this.calcium = 0;
+        this.iron = 0;
+        this.potassium = 0;
+        this.sodium = 0;
     }
 
     public double getCalcium() {

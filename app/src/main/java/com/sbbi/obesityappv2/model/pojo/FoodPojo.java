@@ -22,6 +22,18 @@ public class FoodPojo implements Serializable {
     private String name;
     private double grams;
 
+    public FoodPojo(){
+        this.carbohydrate = 0;
+        this.cholesterol = 0;
+        this.energy = 0;
+        this.fiber = 0;
+        this.lipid = 0;
+        this.protein = 0;
+        this.sugar = 0;
+        this.name = "";
+        this.grams = 0;
+    }
+
     public String getName() {
         return name;
     }

@@ -13,12 +13,16 @@ import android.widget.Toast;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.activity.CorrectPrediction;
 import com.sbbi.obesityappv2.activity.MealDetailsActivity;
+import com.sbbi.obesityappv2.activity.ResultNutrientActivity;
+import com.sbbi.obesityappv2.helper.FoodHelper;
 import com.sbbi.obesityappv2.holder.FoodViewHolder;
 import com.sbbi.obesityappv2.holder.MealViewHolder;
 import com.sbbi.obesityappv2.interf.MealPojoListener;
 import com.sbbi.obesityappv2.interf.TestFoodInterf;
 import com.sbbi.obesityappv2.model.Food;
+import com.sbbi.obesityappv2.model.FoodsWeightEstimation;
 import com.sbbi.obesityappv2.model.bundle.BundleCorrectFood;
+import com.sbbi.obesityappv2.model.pojo.FoodPojo;
 import com.sbbi.obesityappv2.model.pojo.MealPojo;
 
 import java.util.List;
@@ -58,17 +62,39 @@ public class MealRecyclerAdapter extends RecyclerView.Adapter<MealViewHolder> {
         holder.getMealType().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(holder.getContext(), "item " + position + " clicked", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(holder.getContext(), MealDetailsActivity.class);
-                //((Activity)holder.getContext()).startActivityForResult(intent, CODE);
+                /*Intent intent = new Intent(holder.getContext(), MealDetailsActivity.class);
 
                 Bundle bundle = new Bundle();
                 intent.putExtra("mealPojo", mealPojo);
 
-                Log.i("CLICK", "clicked on meal");
+                holder.getContext().startActivity(intent);*/
 
-                holder.getContext().startActivity(intent);
+                if(mealPojo.getListFood().size() > 0){
+
+                    FoodPojo foodPojo1 = mealPojo.getListFood().get(0);
+                    FoodPojo foodPojo2 = mealPojo.getListFood().get(1);
+                    FoodPojo foodPojo3 = mealPojo.getListFood().get(2);
+
+                    Food food1 = FoodHelper.FoodPojoToFood(foodPojo1);
+                    Food food2 = FoodHelper.FoodPojoToFood(foodPojo2);
+                    Food food3 = FoodHelper.FoodPojoToFood(foodPojo3);
+
+                    FoodsWeightEstimation foodWeight = new FoodsWeightEstimation();
+                    foodWeight.setFood1(food1);
+                    foodWeight.setFood2(food2);
+                    foodWeight.setFood3(food3);
+
+                    Bundle bundle = new Bundle();
+
+                    Intent intent = new Intent(holder.getContext(), ResultNutrientActivity.class);
+                    intent.putExtra("result", foodWeight);
+                    holder.getContext().startActivity(intent);
+
+                }
+                else {
+                    Toast.makeText(holder.getContext(), "No foods logged for this meal", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

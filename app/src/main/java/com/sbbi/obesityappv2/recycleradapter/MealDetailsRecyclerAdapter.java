@@ -46,7 +46,7 @@ public class MealDetailsRecyclerAdapter extends RecyclerView.Adapter<FoodDetails
         holder.getProteinFood().setText("Protein: " + food.getProtein() + " g");
         holder.getSugarFood().setText("Sugar: " + food.getSugar() + " g");
         holder.getGramFood().setText("Grams: " + food.getGrams() + " g");
-        holder.getCholesterol().setText("Grams: " + food.getCholesterol() + " g");
+        holder.getCholesterol().setText("Cholesterol: " + food.getCholesterol() + " g");
 
     }
 

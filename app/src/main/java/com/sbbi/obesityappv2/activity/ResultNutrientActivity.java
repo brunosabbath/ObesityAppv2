@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.expandableListView.MyExpandableAdapter;
@@ -36,10 +37,15 @@ public class ResultNutrientActivity extends AppCompatActivity{
         Bundle extras = getIntent().getExtras();
         foodsWeightEstimation = (FoodsWeightEstimation) extras.get("result");
 
-        listView = (ExpandableListView) findViewById(R.id.expandable_list);
-        initData();
-        listAdapter = new MyExpandableAdapter(this, listDataHeader, listHash);
-        listView.setAdapter(listAdapter);
+        if(foodsWeightEstimation.getFood1() != null && foodsWeightEstimation.getFood2() != null && foodsWeightEstimation.getFood3() != null){
+            listView = (ExpandableListView) findViewById(R.id.expandable_list);
+            initData();
+            listAdapter = new MyExpandableAdapter(this, listDataHeader, listHash);
+            listView.setAdapter(listAdapter);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No foods logged for this meal", Toast.LENGTH_LONG).show();
+        }
 
     }
 

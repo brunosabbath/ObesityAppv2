@@ -89,7 +89,11 @@
         <activity android:name=".activity.MealDetailsActivity" />
         <activity android:name=".activity.InsightActivity" />
         <activity android:name=".activity.FingerActivity" />
-        <activity android:name=".activity.ResultNutrientActivity"></activity>
+        <activity android:name=".activity.ResultNutrientActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sbbi.obesityappv2.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
