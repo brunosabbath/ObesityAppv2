@@ -60,8 +60,10 @@ public class PreferencesFragment extends Fragment implements ResourceLoadedHandl
         Button btnFinger = (Button) layout.findViewById(R.id.btnFinger);
         Button btnLogout = (Button) layout.findViewById(R.id.btnLogout);
 
-        if(loggedIn){
+        btnGetActivity.setVisibility(View.INVISIBLE);
 
+        if(loggedIn){
+            btnFitbit.setVisibility(View.INVISIBLE);
         }
 
         btnFitbit.setOnClickListener(new View.OnClickListener() {

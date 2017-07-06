@@ -5,6 +5,14 @@
     android:orientation="vertical"
     tools:context="com.sbbi.obesityappv2.fragment.InsightsFragment">
 
+    <TextView
+        android:id="@+id/insight_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please, go to preferences \n and get fitbit data"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        android:gravity="center"/>
     <Button
         android:layout_gravity="center_vertical|center_horizontal"
         android:textAlignment="center"

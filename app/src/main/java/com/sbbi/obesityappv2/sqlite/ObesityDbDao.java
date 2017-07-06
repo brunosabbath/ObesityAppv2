@@ -40,7 +40,8 @@ public class ObesityDbDao {
         if(cursor.moveToNext()){
             isEmpty = false;
         }
-
+        cursor.close();
+        db.close();
         return isEmpty;
     }
 
@@ -62,7 +63,8 @@ public class ObesityDbDao {
             user.setId(id);
             user.setName(name);
         }
-
+        cursor.close();
+        db.close();
         return user;
     }
 
@@ -78,7 +80,8 @@ public class ObesityDbDao {
             finger.setHeight(cursor.getDouble(USER_ID));
             finger.setWidth(cursor.getDouble(USER_NAME));
         }
-
+        cursor.close();
+        db.close();
         return finger;
     }
 
@@ -96,7 +99,7 @@ public class ObesityDbDao {
         String[] selectionArgs = {user.getId() + ""};
 
         db.update(ObesityDb.Obesity.TABLE_NAME, values, selection, selectionArgs);
-
+        db.close();
     }
 
     public void addUser(User user){
@@ -110,12 +113,13 @@ public class ObesityDbDao {
         values.put(ObesityDb.Obesity.FINGER_WIDTH, -1);
 
         long newRow = db.insert(ObesityDb.Obesity.TABLE_NAME, null, values);
+        db.close();
     }
 
     public void delete() {
 
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("DELETE FROM " + ObesityDb.Obesity.TABLE_NAME);
-
+        db.close();
     }
 }

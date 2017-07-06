@@ -19,33 +19,17 @@ import com.sbbi.obesityappv2.tabs.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-
-//public class MainActivity extends ActionBarActivity implements EventLayoutAfterRequestInterf {
-
-    private Toolbar toolbar;
     private ViewPager mPager;
     private SlidingTabLayout mTabs;
-    private EditText prompt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
-
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyPageAdapter(getSupportFragmentManager()));
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
-
-        /*mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.black);
-            }
-        });*/
 
         mTabs.setDistributeEvenly(true);
         mTabs.setViewPager(mPager);
@@ -60,66 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings)
-            return true;
-
-        if(id == R.id.action_feedback){
-            startActivity(new Intent(this, FeedbackActivity.class));
-        }
-
-        if(id == R.id.action_about){
-            startActivity(new Intent(this, AboutActivity.class));
-        }
-
-
-        if(id == R.id.addVenue) {
-            startActivity(new Intent(this, InsertVenueActivity.class));
-        }
-
-        if(id == R.id.addEvent)
-            startActivity(new Intent(this, InsertEventActivity.class));*/
-
-
 
         return super.onOptionsItemSelected(item);
     }
-
-    private void alert() {
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View promptView = inflater.inflate(R.layout.prompt, null);
-        prompt = (EditText) promptView.findViewById(R.id.prompt_input);
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        b.setView(promptView);
-        b.setCancelable(false).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.i("bruno",prompt.getText().toString());
-            }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.i("bruno","apertou cancelar");
-            }
-        });
-
-        AlertDialog alert = b.create();
-        alert.show();*/
-    }
-
-    /*@Override
-    public void setLayoutAfterRequest(Event[] events) {
-        //eventAdapter = new VenueRecyclerAdapter(getApplicationContext(), events, this);
-        //recyclerView.setAdapter(event);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-    }*/
 
     class MyPageAdapter extends FragmentPagerAdapter {
 

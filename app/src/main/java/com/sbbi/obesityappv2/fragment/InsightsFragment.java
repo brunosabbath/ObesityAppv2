@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fitbit.api.ResourceLoadedHandler;
@@ -14,6 +15,7 @@ import com.fitbit.api.models.ActivitiesCalories;
 import com.fitbit.api.models.User;
 import com.fitbit.api.services.CaloriesService;
 import com.fitbit.api.services.UserService;
+import com.fitbit.authentication.AuthenticationManager;
 import com.sbbi.obesityappv2.R;
 import com.sbbi.obesityappv2.activity.InsightActivity;
 import com.sbbi.obesityappv2.helper.ConnectionHelper;
@@ -33,11 +35,19 @@ public class InsightsFragment extends Fragment implements UserService.UserHandle
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_insights, container, false);
 
+        boolean loggedIn = AuthenticationManager.isLoggedIn();
+
         Button insightBtn = (Button) view.findViewById(R.id.insight_button);
+
+        if(!loggedIn){
+            insightBtn.setVisibility(View.GONE);
+            TextView textView = (TextView) view.findViewById(R.id.insight_label);
+            textView.setVisibility(View.VISIBLE);
+        }
+
+
         insightBtn.setOnClickListener(this);
 
         return view;
