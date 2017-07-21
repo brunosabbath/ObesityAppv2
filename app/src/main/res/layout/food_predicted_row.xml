@@ -53,7 +53,7 @@
             android:padding="8dp"
             android:textColor="#222"
             android:textSize="10dp"
-            android:text="remove food"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/food_name" />

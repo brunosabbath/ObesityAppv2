@@ -60,7 +60,6 @@ public class ResultNutrientActivity extends AppCompatActivity{
         else{
             Toast.makeText(getApplicationContext(), "No foods logged for this meal", Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void initData(){
