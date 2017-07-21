@@ -12,7 +12,7 @@
     tools:context="com.sbbi.obesityappv2.activity.FingerActivity">
 
     <TextView
-        android:text="Finger length"
+        android:text="Finger length (in cm)"
         android:id="@+id/finger_length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:text="Finger width"
+        android:text="Finger width (in cm)"
         android:id="@+id/finger_width"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

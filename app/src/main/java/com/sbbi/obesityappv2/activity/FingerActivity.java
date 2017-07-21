@@ -40,7 +40,7 @@ public class FingerActivity extends AppCompatActivity implements FingerListener 
                 String lengthStr = lengthEditText.getText().toString().trim();
                 String widthStr = widthEditText.getText().toString().trim();
 
-                if(VerifyHelper.isValidText(lengthStr)|| VerifyHelper.isValidText(widthStr)){
+                if(!VerifyHelper.isValidText(lengthStr)|| !VerifyHelper.isValidText(widthStr)){
                     Toast.makeText(getApplicationContext(), "Fields cannot be empty", Toast.LENGTH_LONG).show();
                 }
                 else{

@@ -18,6 +18,7 @@ import com.sbbi.obesityappv2.model.Prediction;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +76,9 @@ public class ResultNutrientActivity extends AppCompatActivity{
         listDataHeader.add(food3.getName());
         listDataHeader.add("Nutrient breakdown");
 
+        food1.formatOutput();
+        food2.formatOutput();
+        food3.formatOutput();
 
         List<String> food1List = new ArrayList<>();
         food1List.add("Grams: " + food1.getGrams() + " g");
@@ -103,6 +107,19 @@ public class ResultNutrientActivity extends AppCompatActivity{
         double totalProteins = food1.getProtein() + food2.getProtein() + food3.getProtein();
         double totalSugars = food1.getSugar() + food2.getSugar() + food3.getSugar();
 
+        DecimalFormat df = new DecimalFormat("#.00");
+        String totalCaloriesStr = df.format(totalCalories).replace(',','.');
+        String totalGramsStr = df.format(totalGrams).replace(',','.');
+        String totalCarbsStr = df.format(totalCarbs).replace(',','.');
+        String totalProteinsStr = df.format(totalProteins).replace(',','.');
+        String totalSugarsStr = df.format(totalSugars).replace(',','.');
+
+        totalCalories = Double.parseDouble(totalCaloriesStr);
+        totalGrams = Double.parseDouble(totalGramsStr);
+        totalCarbs = Double.parseDouble(totalCarbsStr);
+        totalProteins = Double.parseDouble(totalProteinsStr);
+        totalSugars = Double.parseDouble(totalSugarsStr);
+
         List<String> breakdownList = new ArrayList<>();
         breakdownList.add("Total calories: " + totalCalories + " kcal");
         breakdownList.add("Total grams: " + totalGrams + " g");
@@ -122,5 +139,4 @@ public class ResultNutrientActivity extends AppCompatActivity{
         listHash.put(listDataHeader.get(2), food3List);
         listHash.put(listDataHeader.get(3), breakdownList);
     }
-
 }

@@ -3,6 +3,7 @@ package com.sbbi.obesityappv2.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -274,4 +275,23 @@ public class Food implements Serializable{
                 " lipids: " + this.lipid;
     }
 
+    public void formatOutput() {
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        carbohydrate = Double.parseDouble(df.format(carbohydrate).replace(',','.'));
+        cholesterol = Double.parseDouble(df.format(cholesterol).replace(',','.'));
+        energy = Double.parseDouble(df.format(energy).replace(',','.'));
+        fattyAcidsMonounsaturated = Double.parseDouble(df.format(fattyAcidsMonounsaturated).replace(',','.'));
+        fattyAcidsPolyunsaturated = Double.parseDouble(df.format(fattyAcidsPolyunsaturated).replace(',','.'));
+        fattyAcidsSaturated = Double.parseDouble(df.format(fattyAcidsSaturated).replace(',','.'));
+        fattyAcidTrans = Double.parseDouble(df.format(fattyAcidTrans).replace(',','.'));
+        fiber = Double.parseDouble(df.format(fiber).replace(',','.'));
+        lipid = Double.parseDouble(df.format(lipid).replace(',','.'));
+        protein = Double.parseDouble(df.format(protein).replace(',','.'));
+        sugar = Double.parseDouble(df.format(sugar).replace(',','.'));
+        calcium = Double.parseDouble(df.format(calcium).replace(',','.'));
+        iron = Double.parseDouble(df.format(iron).replace(',','.'));
+        potassium = Double.parseDouble(df.format(potassium).replace(',','.'));
+        sodium = Double.parseDouble(df.format(sodium).replace(',','.'));
+    }
 }

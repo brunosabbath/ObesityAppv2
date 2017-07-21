@@ -18,7 +18,7 @@
         android:layout_alignParentLeft="true"
         android:textSize="20dp"
         android:layout_margin="16dp"
-        android:text="top picture"
+        android:text="Top picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -38,7 +38,7 @@
         android:layout_alignParentLeft="true"
         android:textSize="20dp"
         android:layout_margin="16dp"
-        android:text="side 1 picture"
+        android:text="Side 1 picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -58,7 +58,7 @@
         android:layout_alignParentLeft="true"
         android:textSize="20dp"
         android:layout_margin="16dp"
-        android:text="side 2 picture"
+        android:text="Side 2 picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -78,7 +78,7 @@
         android:layout_toLeftOf="@id/cameraSide3"
         android:textSize="20dp"
         android:layout_margin="16dp"
-        android:text="side 3 picture"
+        android:text="Side 3 picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

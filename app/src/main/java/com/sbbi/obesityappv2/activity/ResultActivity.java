@@ -73,6 +73,33 @@ public class ResultActivity extends AppCompatActivity implements SavedMealListen
 
         //send data to adapter
         List<List<String>> list = new ArrayList<>();
+
+        /*List<String> listLeft = new ArrayList<String>();
+        List<String> listRight = new ArrayList<String>();
+        List<String> listBottom = new ArrayList<String>();
+
+        listLeft.add("Rice");
+        listLeft.add("Popcorn");
+        listLeft.add("Chicken breast");
+        listLeft.add("Quesadilla");
+        listLeft.add("Egg");
+
+        listRight.add("Ramen");
+        listRight.add("Pasta");
+        listRight.add("Pizza");
+        listRight.add("Lasagna");
+        listRight.add("Omelet");
+
+        listBottom.add("French fries");
+        listBottom.add("Chips");
+        listBottom.add("Pretzel");
+        listBottom.add("Tofu");
+        listBottom.add("Potato");
+
+        list.add(listLeft);
+        list.add(listRight);
+        list.add(listBottom);*/
+
         list.add(predictions.getPredictionsFoodLeft());
         list.add(predictions.getPredictionsFoodRight());
         list.add(predictions.getPredictionsFoodBottom());
