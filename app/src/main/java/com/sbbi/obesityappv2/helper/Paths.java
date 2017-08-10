@@ -6,9 +6,9 @@ package com.sbbi.obesityappv2.helper;
 
 public class Paths {
 
-    //development
+    //development path
     //public static String myPc = "http://129.93.164.34:5150";
-    //production
+    //production path
     public static String myPc = "http://sbbi-panda.unl.edu:8080/obesity";
 
     public static String signup = myPc + "/user/signup";
